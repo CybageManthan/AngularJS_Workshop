@@ -41,6 +41,7 @@ angular.module('mainApp')
             /*on Success*/
             $scope.message = data.message;
             $scope.IsBookAdded = !$scope.IsBookAdded;
+            $scope.hideshowBookForm = true;
             
             
         },

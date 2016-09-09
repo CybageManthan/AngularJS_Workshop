@@ -4,9 +4,17 @@
 
 <h3 class="text-center"> Author Details </h3> 
 
-<div ng-show="IsAuthorAdded" class="alert alert-success" role="alert">{{message}}</div>    
     
-<form class="form-horizontal col-sm-offset-2">
+<div ng-show="IsAuthorAdded"> <!--another class shown after update or remove-->
+        
+        <div  class="alert alert-success alert-margin" role="alert">{{message}}</div>
+        <a ui-sref="app" role="button" class="btn btn-sm btn-primary"> 
+          <i class="fa fa-home"  aria-hidden="true"></i>  Home</a>
+    
+</div> <!--end -->
+    
+    
+<form class="form-horizontal col-sm-offset-2" ng-hide="hideshowAuthorForm">
   <div class="form-group">
     <label for="empid" class="col-sm-2 control-label">Author Id</label>
     <div class="col-sm-6">

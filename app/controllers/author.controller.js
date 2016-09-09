@@ -27,6 +27,7 @@ angular.module('mainApp')
             /*on Success*/
             $scope.message = data.message;
             $scope.IsAuthorAdded = !$scope.IsAuthorAdded;
+            $scope.hideshowAuthorForm = true;
             
             
         },

@@ -4,9 +4,15 @@
 
 <h3 class="text-center"> Book Details </h3> 
 
-<div ng-show="IsBookAdded" class="alert alert-success" role="alert">{{message}}</div>  
+<div ng-show="IsBookAdded"> <!--another class shown after update or remove-->
+        
+        <div  class="alert alert-success alert-margin" role="alert">{{message}}</div>
+        <a ui-sref="app" role="button" class="btn btn-sm btn-primary"> 
+          <i class="fa fa-home"  aria-hidden="true"></i>  Home</a>
     
-<form class="form-horizontal col-sm-offset-2">
+</div> <!--end -->
+    
+<form class="form-horizontal col-sm-offset-2" ng-hide="hideshowBookForm">
   <div class="form-group">
     <label for="isbn" class="col-sm-2 control-label">ISBN</label>
     <div class="col-sm-6">
@@ -59,7 +65,8 @@
     
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" ng-click="addNewBook(newBook)" class="btn btn-default">Add New Book</button>
+      <button type="submit" ng-click="addNewBook(newBook)" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus"  aria-hidden="true"></span>  Add New Book</button>
     </div>
   </div>
 </form>
