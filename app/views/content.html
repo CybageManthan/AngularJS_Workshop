@@ -1,7 +1,13 @@
+<!--HTML VIEW TO DISPALY THE LIST OF BOOKS -->    
+
+<div class="container" ng-controller="bookController"> <!--START OF CONTAINER-->
     
-<div class="container" ng-controller="bookController">
-    <div class="jumbotron">
-        <div class="table-responsive">
+    <div class="jumbotron"> <!--START OF JUMBOTRON-->
+        
+        <div class="table-responsive">  <!--START OF TABLE-->
+        
+            <input type="text" ng-model="searchBooks" class="form-control search-margin" placeholder="Search Books by ISBN or Title or Author">    
+            
             <table class="table table-bordered">
             <thead>
             <tr>
@@ -10,17 +16,19 @@
                 <th class="text-center">Author</th>
             </tr>
             </thead>
-            <tbody ng-repeat="book in books">
+            <tbody ng-repeat="book in books | filter : searchBooks ">
             <tr>
                 <td class="text-center"><a ui-sref="app.bookDetails({id: book.isbn})">{{book.isbn}}</a></td>
                 <td class="text-center">{{book.title}}</td>
                 <td class="text-center"><a ui-sref="app.authDetails({id: book.author})">{{book.author}}</a></td>
             </tr>
-            </tbody>
-            </table>
+             </tbody>
+                
+            </table> 
         
-        </div>
+        </div> <!--END OF TABLE-->
         
-        
-    </div>
-</div>
+    </div> <!--END OF JUMBOTRON-->
+    
+    
+</div> <!--END OF CONTAINER-->

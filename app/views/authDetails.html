@@ -1,8 +1,10 @@
-<div class="container"> <!-- start of .container -->
+<!-- HTML PAGE FOR UPDATE/DELETE/VIEW PERTICULAR AUTHOR -->
 
-<div class="jumbotron"> <!--start of jumbotron-->
+<div class="container"> <!-- START OF CONTAINER -->
 
-    <div class="media" ng-show="showRemoveAuthorData">
+<div class="jumbotron"> <!--START OF JUMBOTRON-->
+
+    <div class="media" ng-show="showRemoveAuthorData"> <!--START OF MEDIA CLASS-->
          <div class="media-left">
             
             <i class="fa fa-user fa-5x" aria-hidden="true"></i>
@@ -16,65 +18,79 @@
          <h6><label>Author Id:</label>  {{author.empid}}</h6>
          <h6><label>Email:</label> {{author.email}}</h6>
          <h6><label>Department:</label> {{author.department}} </h6>
-        <h6><label>Website:</label> {{author.website}} </h6>
+         <h6><label>Website:</label> {{author.website}} </h6>
          <h6><label>Skills:</label> <i ng-repeat = "a in author.skills track by $index"> {{a}}</i> </h6>
 
-      <a class="btn btn-primary btn-sm" ng-click="editAuthorData()" role="button">      
-      <span class="glyphicon glyphicon-edit"  aria-hidden="true"></span>	Edit</a>    
-      </div>
-        
-    </div> <!--end of media class-->
+          <a class="btn btn-primary btn-sm" ng-click="editAuthorData()" role="button">      
+          <span class="glyphicon glyphicon-edit"  aria-hidden="true"></span>	Edit</a>    
+          </div>
+
+    </div> <!--END OF MEDIA CLASS-->
     
-    <div ng-show="IsAuthorUpdatedRemoved"> <!--another class shown after update or remove-->
+    <div ng-show="IsAuthorUpdatedRemoved"> <!--DIV SHOWN AFTER AUTHOR UPDATED OR DELETED-->
         
         <div  class="alert alert-success alert-margin" role="alert">{{message}}</div>
         <a ui-sref="app" role="button" class="btn btn-sm btn-primary"> 
           <i class="fa fa-home"  aria-hidden="true"></i>  Home</a>
     
-    </div> <!--end -->
+    </div> <!--END -->
     
     
-    <div> <!-- start of form -->
+    <div> <!-- START OF FORM-->
     
-    <form class="form-horizontal col-sm-offset-2" ng-show="showForm">
+    <form class="form-horizontal col-sm-offset-2" ng-show="showForm" name="authEditForm" novalidate>
      
+      <!--AUTHOR ID:DISABLED-->    
+        
       <div class="form-group">
-        <label for="empid" class="col-sm-2 control-label">Author Id</label>
+        <label class="col-sm-2 control-label">Author Id</label>
         <div class="col-sm-4">
-          <input type="number" ng-model="author.empid" class="form-control" id="empid" placeholder="Author Id" disabled>
+          <input type="number" ng-model="author.empid" class="form-control" placeholder="Author Id" disabled>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="empname" class="col-sm-2 control-label">Name</label>
+     <!--AUTHOR NAME: ANGULAR VALIDATION --> 
+        
+     <div class="form-group" ng-class="{ 'has-error' : authEditForm.name.$invalid && authEditForm.name.$dirty }">
+        <label class="col-sm-2 control-label">Name</label>
         <div class="col-sm-4">
-          <input type="text" ng-model="author.name" class="form-control" id="empname" placeholder="Author Name">
+          <input type="text" name="name" ng-model="author.name" class="form-control" placeholder="Author Name" required>
+        <span class="help-block" ng-show="authEditForm.name.$invalid && authEditForm.name.$dirty">Author Name is required</span>
         </div>
       </div>
 
-      <div class="form-group">
-       <label for="empemail" class="col-sm-2 control-label">Email</label>
+    <!--AUTHOR EMAIL:ANGULAR VALIDATION-->  
+        
+    <div class="form-group" ng-class="{ 'has-error' : authEditForm.email.$invalid && authEditForm.email.$dirty }">
+       <label class="col-sm-2 control-label">Email</label>
         <div class="col-sm-4">
-          <input type="email" ng-model="author.email" class="form-control" id="empemail" placeholder="Author Email">
+          <input type="email" name="email" ng-model="author.email" class="form-control" placeholder="Author Email" required>
+          <span class="help-block" ng-show="authEditForm.email.$invalid && authEditForm.email.$dirty">Invalid Email Address</span>
         </div>
       </div>
 
-       <div class="form-group">
-       <label for="empdepartment" class="col-sm-2 control-label">Department</label>
+    <!--AUTHOR DEPARTMENT-->    
+        
+    <div class="form-group">
+       <label  class="col-sm-2 control-label">Department</label>
         <div class="col-sm-4">
-          <input type="text" ng-model="author.department" class="form-control" id="empdepartment" placeholder="Author Department">
+          <input type="text" ng-model="author.department" class="form-control"  placeholder="Author Department">
         </div>
       </div>
 
-       <div class="form-group">
-       <label for="empwebsite" class="col-sm-2 control-label">Website</label>
+    <!--AUTHOR WEBSITE-->    
+        
+    <div class="form-group">
+       <label  class="col-sm-2 control-label">Website</label>
         <div class="col-sm-4">
-          <input type="text" ng-model="author.website" class="form-control" id="empwebsite" placeholder="Author Website">
+          <input type="text" ng-model="author.website" class="form-control" placeholder="Author Website">
         </div>
       </div>
 
-      <div class="form-group">
-      <label for="avai_on" class="col-sm-2 control-label">Skills</label>
+    <!--AUTHOR SKILLS-->    
+        
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Skills</label>
 
         <div class="col-sm-6" >
 
@@ -82,7 +98,9 @@
 
         </div>
       </div>
-      
+    
+    <!--UPDATE AND DELETE BUTTONS-->    
+        
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
          <button type="submit" ng-click="updateAuthorData(author)" class="btn btn-sm btn-primary"> 
@@ -92,14 +110,10 @@
         </div>
     </div>
         
-</form>
+    </form> 
     
-</div>
-    
-    
-    
-    
-    
+  </div> <!--END OF FORM -->
 
-</div>
-</div>
+ </div> <!--END OF JUMBOTRON-->
+    
+</div> <!--END OF CONTAINER-->

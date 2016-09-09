@@ -1,19 +1,22 @@
+/*-----------------------------------FACTORY FOR AUTHOR---------------------------*/
+/*--------------------AJAX REQUESTS AND SERVICING CONTROLLER WITH REQUIRED DATA --------------*/
+/*-------------------------- USAGE OF PROMISE. $Q AND $HTTP SERVICES.*/
+
 angular.module('mainApp')
 
-
-
-.factory('authorFactory', function($http,$q,baseUrl,$httpParamSerializerJQLike) {
+.factory('authorFactory', function($http,$q,baseUrl) {
  
-    /*Creating an object*/        
+    /*CREATE ONE OBJECT*/        
 
     var authfac = {};
 
     
-    /*Return a book of array*/
+    /*GET REQUEST TO FETCH EXISTING USER BASED ON PARAMETER */
+    
     authfac.getAuthor = function(author) {
         
         
-        var deferred = $q.defer();    /*Creating an deffered object */
+        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */
          
         $http({
 
@@ -24,24 +27,24 @@ angular.module('mainApp')
 
             }).success(function(data){
                 
-                deferred.resolve(data); /*On success resolved the Data*/
+                deferred.resolve(data); /*ON SUCCESS RESOLVE DATA */
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*On Failure show the error*/
+                deferred.reject('There was an error'); /*ON FAILURE SHOW ERROR*/
 
             })
 
-            return deferred.promise; /*returing the promise*/
+            return deferred.promise; /*RETURN THE PROMISE*/
 
     };
     
     
-    /*Create new Author*/
+    /*POST REQUST TO CREATE A NEW AUTHOR */
     
     authfac.createAuthor = function(newAuthor) {
       
-        var deferred = $q.defer();    /*Creating an deffered object */  
+        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */  
         
         $http({
 
@@ -52,24 +55,24 @@ angular.module('mainApp')
                 headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(data){
                 
-                deferred.resolve(data); /*On success resolved the Data*/
+                deferred.resolve(data); /*ON SUCCESS RESOLVE DATA */
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*On Failure show the error*/
+                deferred.reject('There was an error'); /*ON FAILURE SHOW ERROR*/
 
             })
 
-            return deferred.promise; /*returing the promise*/
+            return deferred.promise; /*RETURN THE PROMISE*/
 
     };
     
     
-    /* function to update the author*/
+    /* PUT REQUEST TO UPDATE THE EXISTING AUTHOR */
     
     authfac.updateAuthor = function(author) {
         
-        var deferred = $q.defer();    /*Creating an deffered object */  
+        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */ 
         
         $http({
 
@@ -79,24 +82,24 @@ angular.module('mainApp')
                 headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(data){
                 
-                deferred.resolve(data); /*On success resolved the Data*/
+                deferred.resolve(data); /*ON SUCCESS RESOLVE DATA */
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*On Failure show the error*/
+                deferred.reject('There was an error'); /*ON FAILURE SHOW ERROR*/
 
             })
 
-            return deferred.promise; /*returing the promise*/
+            return deferred.promise; /*RETURN THE PROMISE*/
         
     };
     
     
-    /*function to remove the author */
+    /*DELETE REQUEST TO REMOVE THE EXSITING AUTHOR */
     
     authfac.removeAuthor = function(authorID) {
         
-        var deferred = $q.defer();    /*Creating an deffered object */  
+        var deferred = $q.defer();   /*CREATING A DEFERRED OBJECT */  
         
         $http({
 
@@ -106,19 +109,19 @@ angular.module('mainApp')
                 headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(data){
                 
-                deferred.resolve(data); /*On success resolved the Data*/
+                deferred.resolve(data); /*ON SUCCESS RESOLVE DATA */
                 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*On Failure show the error*/
+                deferred.reject('There was an error'); /*ON FAILURE SHOW ERROR*/
 
             })
 
-            return deferred.promise; /*returing the promise*/
+            return deferred.promise; /*RETURN THE PROMISE*/
         
     };
     
     
-  return authfac;
+  return authfac; /* RETURN THE FACTORY OBJECT TO CONTROLLER */
 
- });
+ }); /* END OF FACTORY*/

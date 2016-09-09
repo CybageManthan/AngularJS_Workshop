@@ -1,76 +1,90 @@
-<div class="container">
+<!-- HTML PAGE FOR CREATING NEW BOOK -->
+
+<div class="container"> <!--START OF CONTAINER-->
 
 <div class="jumbotron">
 
 <h3 class="text-center"> Book Details </h3> 
 
-<div ng-show="IsBookAdded"> <!--another class shown after update or remove-->
+<div ng-show="IsBookAdded"> <!--DIV SHOW AFTER BOOK ADDED -->
         
         <div  class="alert alert-success alert-margin" role="alert">{{message}}</div>
         <a ui-sref="app" role="button" class="btn btn-sm btn-primary"> 
           <i class="fa fa-home"  aria-hidden="true"></i>  Home</a>
     
-</div> <!--end -->
+</div> <!-- END -->
+
+<!--START OF FORM-->    
     
-<form class="form-horizontal col-sm-offset-2" ng-hide="hideshowBookForm">
-  <div class="form-group">
-    <label for="isbn" class="col-sm-2 control-label">ISBN</label>
+<form class="form-horizontal col-sm-offset-2" name="bookForm" ng-hide="hideshowBookForm" novalidate>
+
+ <!--BOOK ISBN:ANGULAR VALIDATION-->
+    
+ <div class="form-group row" ng-class="{ 'has-error' : bookForm.isbn.$invalid && bookForm.isbn.$dirty }">
+    <label class="col-sm-2 control-label">ISBN</label>
     <div class="col-sm-6">
-      <input type="text" ng-model="newBook.isbn" class="form-control" id="isbn" placeholder="ISBN Number">
+      <input type="text" name="isbn" ng-model="newBook.isbn" class="form-control" placeholder="ISBN Number" required>
+      <span ng-show="bookForm.isbn.$invalid && bookForm.isbn.$dirty" class="help-block">ISBN is Reqiured</span> 
     </div>
   </div>
-  <div class="form-group">
-    <label for="booktitle" class="col-sm-2 control-label">Book Title</label>
+    
+ <!--BOOK TITLE:ANGULAR VALIDATION-->
+    
+ <div class="form-group row" ng-class="{'has-error' : bookForm.title.$invalid && bookForm.title.$dirty}">
+    <label class="col-sm-2 control-label">Book Title</label>
     <div class="col-sm-6">
-      <input type="text" ng-model="newBook.title" class="form-control" id="booktitle" placeholder="Book Title">
+      <input type="text" name="title" ng-model="newBook.title" class="form-control" placeholder="Book Title" required>
+        <span ng-show="bookForm.title.$invalid && bookForm.title.$dirty" class="help-block">Title is required</span>
     </div>
   </div>
 
-  <div class="form-group">
-   <label for="author" class="col-sm-2 control-label">Book Author</label>
+ <!--BOOK AUTHOR:ANGULAR VALIDATION-->   
+
+ <div class="form-group row" ng-class="{'has-error' : bookForm.author.$invalid && bookForm.author.$dirty}">
+   <label class="col-sm-2 control-label">Book Author</label>
     <div class="col-sm-6">
-      <input type="text" ng-model="newBook.author" class="form-control" id="author" placeholder="Book Author">
+      <input type="text" name="author" ng-model="newBook.author" class="form-control" placeholder="Book Author" required>
+    <span ng-show="bookForm.author.$invalid && bookForm.author.$dirty" class="help-block">Author is required</span>
     </div>
   </div>
 
-   <div class="form-group">
-   <label for="price" class="col-sm-2 control-label">Book Price</label>
+<!--BOOK PRICE:ANGULAR VALIDATION-->    
+    
+ <div class="form-group row" ng-class="{'has-error' : bookForm.price.$invalid && bookForm.price.$dirty}">
+   <label class="col-sm-2 control-label">Book Price</label>
     <div class="col-sm-6">
-      <input type="number" ng-model="newBook.price" class="form-control" id="price" placeholder="Book Price">
+      <input type="number" name="price" ng-model="newBook.price" class="form-control" placeholder="Book Price" required>
+      
+      <span ng-show="bookForm.price.$invalid && bookForm.price.$dirty" class="help-block">Price is required and only containes numbers</span>
+        
     </div>
   </div>
 
- <div class="form-group">
-  <label for="avai_on" class="col-sm-2 control-label">Available On</label>
+<!--BOOK AVAILABLE ON:ANGULAR VALIDATION-->    
+    
+ <div class="form-group row" ng-class="{'has-error' : bookForm.availableOn.$invalid && bookForm.availableOn.$dirty}">
+  <label class="col-sm-2 control-label">Available On</label>
 
     <div class="col-sm-6" >
     
-      <textarea class="form-control" id="avai_on" ng-model="newBook.availableOn" placeholder="Add your eCommoerce sites with comma sepration" rows="3"></textarea>
+      <textarea class="form-control" name="availableOn" ng-model="newBook.availableOn" placeholder="Add your eCommoerce sites with comma sepration" rows="3" required></textarea>
+    
+       <span ng-show="bookForm.availableOn.$invalid && bookForm.availableOn.$dirty" class="help-block">availableOn is required</span>    
        
     </div>
   </div>
 
-<!--<div class="form-group">
-    <label class="col-sm-2 control-label">Available On</label>
+ <!--ADD NEW BOOK BUTTON-->   
     
-    <div class="checkbox-inline">
-    <input type="checkbox" name="availableOn" ng-model="newBook.availableOn.amazon" ng-true-value="Amazon">Amazon
-    </div>
-    
-    <div class="checkbox-inline">
-    <input type="checkbox" name="availableOn" ng-model="newBook.availableOn.snapdeal" ng-true-value="Snapdeal">Snapdeal
-    </div>
-    
-    </div>-->
-    
-  <div class="form-group">
+   <div class="form-group row">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" ng-click="addNewBook(newBook)" class="btn btn-default">
+      <button type="button" ng-disabled="bookForm.$invalid" ng-click="addNewBook(newBook)" class="btn btn-primary">
       <span class="glyphicon glyphicon-plus"  aria-hidden="true"></span>  Add New Book</button>
     </div>
-  </div>
-</form>
+   </div>
+    
+  </form> <!--END OF FORM-->
 
-</div>
+ </div> <!--END OF JUMBOTRON-->
 
-</div>
+</div> <!--END OF CONTAINER-->

@@ -1,47 +1,66 @@
-<div class="container">
+<!-- HTML PAGE FOR CREATING NEW AUTHOR -->
 
-<div class="jumbotron">
+<div class="container">    <!--START OF CONTAINER-->
+
+<div class="jumbotron"> <!-- START OF JUMBOTRON-->
 
 <h3 class="text-center"> Author Details </h3> 
 
     
-<div ng-show="IsAuthorAdded"> <!--another class shown after update or remove-->
+<div ng-show="IsAuthorAdded"> <!--DIV SHOWN AFTER NEW AUTHOR ADDED-->
         
         <div  class="alert alert-success alert-margin" role="alert">{{message}}</div>
         <a ui-sref="app" role="button" class="btn btn-sm btn-primary"> 
           <i class="fa fa-home"  aria-hidden="true"></i>  Home</a>
     
-</div> <!--end -->
+</div> <!-- END -->
     
+
+<!--START OF FORM-->    
     
-<form class="form-horizontal col-sm-offset-2" ng-hide="hideshowAuthorForm">
-  <div class="form-group">
-    <label for="empid" class="col-sm-2 control-label">Author Id</label>
+<form class="form-horizontal col-sm-offset-2" ng-hide="hideshowAuthorForm" name="authorForm" novalidate>
+
+  <!--AUTHOR EMPLOYEE ID : ANGULAR VALIDATION --> 
+    
+  <div class="form-group" ng-class="{ 'has-error' : authorForm.empid.$invalid && authorForm.empid.$dirty }">
+    <label class="col-sm-2 control-label">Author Id</label>
     <div class="col-sm-6">
-      <input type="number" ng-model="newAuthor.empid" class="form-control" id="empid" placeholder="Author Id">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="empname" class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-6">
-      <input type="text" ng-model="newAuthor.name" class="form-control" id="empname" placeholder="Author Name">
+      <input type="number" name="empid" ng-model="newAuthor.empid" class="form-control" placeholder="Author Id" required>
+      <span class="help-block" ng-show="authorForm.empid.$invalid && authorForm.empid.$dirty">Author Id is required</span>
     </div>
   </div>
 
-  <div class="form-group">
-   <label for="empemail" class="col-sm-2 control-label">Email</label>
+ <!--AUTHOR NAME: ANGULAR VALIDATION --> 
+    
+  <div class="form-group" ng-class="{ 'has-error' : authorForm.name.$invalid && authorForm.name.$dirty }">
+    <label class="col-sm-2 control-label">Name</label>
     <div class="col-sm-6">
-      <input type="email" ng-model="newAuthor.email" class="form-control" id="empemail" placeholder="Author Email">
+      <input type="text" name="name" ng-model="newAuthor.name" class="form-control" placeholder="Author Name" required>
+      <span class="help-block" ng-show="authorForm.name.$invalid && authorForm.name.$dirty">Author Name is required</span>    
     </div>
   </div>
 
-   <div class="form-group">
+ <!--AUTHOR EMAIL ID : ANGULAR VALIDATION --> 
+    
+  <div class="form-group" ng-class="{ 'has-error' : authorForm.email.$invalid && authorForm.email.$dirty }">
+   <label class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-6">
+      <input type="email" name="email" ng-model="newAuthor.email" class="form-control"  placeholder="Author Email" required>
+      <span class="help-block" ng-show="authorForm.email.$invalid && authorForm.email.$dirty">Invalid Email ID</span> 
+    </div>
+  </div>
+
+ <!--AUTHOR DEPARTMENT --> 
+    
+ <div class="form-group">
    <label for="empdepartment" class="col-sm-2 control-label">Department</label>
     <div class="col-sm-6">
       <input type="text" ng-model="newAuthor.department" class="form-control" id="empdepartment" placeholder="Author Department">
     </div>
   </div>
-
+    
+  <!--AUTHOR WEBSITE --> 
+    
    <div class="form-group">
    <label for="empwebsite" class="col-sm-2 control-label">Website</label>
     <div class="col-sm-6">
@@ -49,23 +68,31 @@
     </div>
   </div>
 
-  <div class="form-group">
-  <label for="avai_on" class="col-sm-2 control-label">Skills</label>
+ <!-- AUTHOR SKILLS:ANGULAR VALIDATION-->
+    
+ <div class="form-group" ng-class="{ 'has-error' : authorForm.skills.$invalid && authorForm.skills.$dirty }">
+  <label class="col-sm-2 control-label">Skills</label>
 
     <div class="col-sm-6" >
     
-      <textarea class="form-control" ng-model="newAuthor.skills" placeholder="Add your skills with comma sepration" rows="3"></textarea>
-       
+      <textarea class="form-control" name="skills" ng-model="newAuthor.skills" placeholder="Add your skills with comma sepration" rows="3" required></textarea>
+      
+      <span class="help-block" ng-show="authorForm.skills.$invalid && authorForm.skills.$dirty">Skills are required</span>     
+        
     </div>
   </div>
-  <div class="form-group">
+ 
+ <!--ADD NEW AUTHOR BUTTON-->    
+    
+ <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" ng-click="addNewAuthor(newAuthor)" class="btn btn-sm btn-default"> 
+      <button type="button" ng-disabled="authorForm.$invalid" ng-click="addNewAuthor(newAuthor)" class="btn btn-sm btn-primary"> 
       <span class="glyphicon glyphicon-plus"  aria-hidden="true"></span>  Add new Author</button>
     </div>
   </div>
-</form>
+    
+ </form> <!-- END OF FORM -->
 
-</div>
+</div> <!--END OF JUMBOTRON -->
 
-</div>
+</div> <!--END OF CONTAINER -->

@@ -1,9 +1,16 @@
+/*OWN CSS CLASS TO APPLY MARGINS WHERE NEEDED*/
+
 .wrapper {
     
-    margin-bottom:1em;
+    margin-bottom:1em!important;
 }
 
 .alert-margin {
     
-    margin-top:0.8em;
+    margin-top:0.8em!important;
+}
+
+.search-margin {
+    
+    margin-bottom:0.8em!important;
 }

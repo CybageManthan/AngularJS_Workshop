@@ -1,44 +1,48 @@
+/*-----------------------------------CONTROLLER FOR BOOK---------------------------*/
+/*-------------------------------CREATE/UPDATE/DELETE/GET BOOK------------------------*/
+/*---------------CONTROLLER USES FACTORY OBJECT'S METHODS-----------------------------*/
+
 angular.module('mainApp')
 
 .controller('bookController',['$scope','$stateParams','bookFactory',function($scope,$stateParams,bookFactory){
 
 
-    /*displaying books data */
+    /* FETCH BOOKS DATA TO DISPLAY ON THE HOME PAGE */
     
 	bookFactory.getBooks().then(function(data){
             
-            $scope.books = data ; /*On Success*/
+            $scope.books = data ; /*ON SUCCESS*/
         
             },
             function(data) {
             
-                alert(data); /*On Failure*/
+                alert(data); /*ON FAILURE*/
             });
         
     
     
-    /* function to fetch the one book */
+    /* FUNCTION TO FETCH EXISTING BOOK DATA */
     
     bookFactory.getBook($stateParams.id).then(function(data){
             
-            //index = data.findIndex(x => x.isbn==$stateParams.id);
+            /*ON SUCCESS*/
             $scope.showRemoveBookData = true;
-            $scope.book = data; /*On Success*/
+            $scope.book = data;
         
             },
             function(data) {
             
-                alert(data); /*On Failure*/
+                /*ON FAILURE*/
             });
     
     
-    /*function to create new Book*/
+    /*FUNCTION TO CREATE A NEW BOOK */
     
     $scope.addNewBook = function(newBook) {
         
         bookFactory.createBook(newBook).then(function(data){
             
-            /*on Success*/
+            /*ON SUCCESS*/
             $scope.message = data.message;
             $scope.IsBookAdded = !$scope.IsBookAdded;
             $scope.hideshowBookForm = true;
@@ -47,13 +51,13 @@ angular.module('mainApp')
         },
         function(data) {
             
-            /*on Failure*/
+            /*ON FAILURE*/
         });
     }
     
     
+    /*DISPLAYING THE FORM WHEN USER CLICK ON THE EDIT BUTTION */
     
-    /*Displaying the form when user click on edit */
     $scope.editBookData = function() {
  
         $scope.showBookForm = !$scope.showBookForm;
@@ -61,13 +65,13 @@ angular.module('mainApp')
     };
     
     
-    /*Update the Book */
+    /*FUNCTION TU UPDATE THE EXISTING BOOK */
     
     $scope.updateBookData = function(book) {
         
         bookFactory.updateBook(book).then(function(data){
             
-            /*on success*/
+            /*ON SUCCESS*/
             
             $scope.message = data.message;
             $scope.IsBookUpdatedRemoved = !$scope.IsBookUpdatedRemoved;
@@ -79,13 +83,13 @@ angular.module('mainApp')
     };
     
    
-    /*Delete the Book */
+    /*FUNCTION TO DELETE THE EXISTING BOOK */
     
     $scope.deleteBookData = function(bookID) {
         
         bookFactory.removeBook(bookID).then(function(data){
             
-            /*on success*/
+            /*ON SUCCESS*/
             
             $scope.message = data.message;
             $scope.IsBookUpdatedRemoved = !$scope.IsBookUpdatedRemoved;  
@@ -98,4 +102,4 @@ angular.module('mainApp')
     
 
         
-}]); /*End of bookController*/
+}]); /*END OF CONTROLLER*/

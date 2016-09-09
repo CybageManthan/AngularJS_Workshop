@@ -1,3 +1,5 @@
+/*APP.JS FILE DEFINES THE ROUTES FOR THE ENTIRE APPLICATION*/
+
 'use strict';
 
 
@@ -7,29 +9,30 @@ angular.module('mainApp',['ui.router'])
 
   $stateProvider
 
-      /*route for the Main Pagw*/
+    /*ROUTE FOR THE MAIN PAGE*/
+  
     .state('app',{
 
       url:'/',
       views:{
 
         'header':{
-            templateUrl: 'views/header.html' /*header view*/
+            templateUrl: 'views/header.html' /*HEADER VIEW*/
         },
         'content':{
 
-          templateUrl:'views/content.html',
+          templateUrl:'views/content.html', /*MAIN CONTENT*/
           controller:'bookController'
         },
         'footer':{ 
-          templateUrl:'views/footer.html'  /*footer view*/
+          templateUrl:'views/footer.html'  /*FOOTER VIEW*/
         }
 
       }
 
     })
 
-    /*Add New Book*/
+    /*ROUTE FOR THE NEWBOOK VIEW*/
 
     .state('app.newBook', {
                 url:'newBook',
@@ -41,7 +44,8 @@ angular.module('mainApp',['ui.router'])
                 }
             })
 
-    /*Add new Author*/
+    /*ROUTE FOR THE NEWAUTHOR VIEW*/
+  
     .state('app.newAuthor', {
                 url:'newAuthor',
                 views: {
@@ -52,7 +56,7 @@ angular.module('mainApp',['ui.router'])
                 }
             })
   
-    /*route for book details*/
+    /*ROUTE FOR THE BOOKDETAILS VIEW */
   
     .state('app.bookDetails',{
       
@@ -69,7 +73,7 @@ angular.module('mainApp',['ui.router'])
 
             })
   
-    /*route for author details*/
+    /*ROUTE FOR THE AUTHORDETAILS VIEW */
   
     .state('app.authDetails',{
       
@@ -86,7 +90,7 @@ angular.module('mainApp',['ui.router'])
 
             });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/'); /*DEFAULT VIEW*/
 
 });        
 

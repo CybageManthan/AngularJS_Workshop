@@ -1,30 +1,36 @@
+/*-----------------------------------CONTROLLER FOR AUTHOR---------------------------*/
+/*-------------------------------CREATE/UPDATE/DELETE/GET AUTHOR------------------------*/
+/*---------------CONTROLLER USES FACTORY OBJECT'S METHODS-----------------------------*/
+
 angular.module('mainApp')
 
 .controller('authController',['$scope','$stateParams','authorFactory',function($scope,$stateParams,authorFactory){
 
 
-    /*displaying author data */
+    /*DISPLAYING THE AUTHOR DATA */
       
     authorFactory.getAuthor($stateParams.id).then(function(data){
             
-            //index = data.findIndex(x => x.name==$stateParams.id);
+            /*ON SUCCESS*/
+        
             $scope.showRemoveAuthorData = true;
-            $scope.author = data; /*On Success*/
+            $scope.author = data; 
         
             },
             function(data) {
             
-                 /*On Failure*/
+                 /* ON FAILURE*/
             });
     
         
-    /*function to create new Author*/
+    /*FUNCTION TO CREATE A NEW AUTHOR*/
     
     $scope.addNewAuthor = function(newAuthor) {
         
         authorFactory.createAuthor(newAuthor).then(function(data){
             
-            /*on Success*/
+            /*ON SUCCESS*/
+            
             $scope.message = data.message;
             $scope.IsAuthorAdded = !$scope.IsAuthorAdded;
             $scope.hideshowAuthorForm = true;
@@ -33,12 +39,13 @@ angular.module('mainApp')
         },
         function(data) {
             
-            /*on Failure*/
+            /*ON FAILURE*/
         });
     }
     
     
-    /*Displaying the form when user click on edit */
+    /*DISPLAYING THE FORM WHEN USER CLICK ON EDIT BUTTON */
+    
     $scope.editAuthorData = function() {
  
         $scope.showForm = !$scope.showForm;
@@ -46,13 +53,13 @@ angular.module('mainApp')
     };
     
     
-    /*Update the Author */
+    /* FUNCTION TO UPDATE THE AUTHOR DATA */
     
     $scope.updateAuthorData = function(author) {
         
         authorFactory.updateAuthor(author).then(function(data){
             
-            /*on success*/
+            /*ON SUCCESS*/
             
             $scope.message = data.message;
             $scope.IsAuthorUpdatedRemoved = !$scope.IsAuthorUpdatedRemoved;
@@ -64,7 +71,7 @@ angular.module('mainApp')
     };
     
    
-    /*Delete the Author */
+    /* FUNCTION TO DELETE THE EXISTING AUTHOR */
     
     $scope.deleteAuthorData = function(authorID) {
         
@@ -81,4 +88,4 @@ angular.module('mainApp')
     
     
     
-}]); /*End of bookController*/
+}]); /*END OF CONTROLLER*/

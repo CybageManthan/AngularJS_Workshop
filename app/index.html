@@ -1,5 +1,16 @@
+<!--INDEX PAGE-->
+<!-- SINGLE PAGE APPLICATION FOR LIBRARY MANAGEMENT SYSTEM -->
+<!--SHOW USAGE OF ANGULAR ROUTING,ANGULAR 2 WAY BINDING-->
+<!--SHOW USAGE OF FACTORIES,CONTROLLER,FILTERS-->
+<!--SHOW USAGE OF $HTTP,$Q SERVICES OF ANGULAR -->
+<!--SHOW USAGE OF BOWER-->
+<!--SHOW USAGE OF BOOTSTRAP AND FONT AWESOME-->
+<!--APPLICATION DEVIDED INTO THE STRUCTURE.-->
+<!--VIEWS HAVE ALL THE VIEWS , CONTROLLER FOLDER HAVE CONTROLLER FILE AND SERVICES FOLDER HAVE FACTORIES WHICH WE INJECT INTO THE CONTROLLER-->
+<!--APP.JS FILE DEFINES THE ROUTES FOR THE SPA -->
+
 <!DOCTYPE html>
-<html lang="en" ng-app="mainApp"> <!-- Configure the page to be an angular application. -->
+<html lang="en" ng-app="mainApp"> <!-- BOOTSTRAP ANGULAR APPLICATION USING NG-APP -->
 
 <head>
     <meta charset="utf-8">
@@ -9,7 +20,8 @@
     
     <title>Library Management System</title>
     
-    <!-- Bootstrap -->
+    <!-- BOOTSTRAP -->
+    
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -24,22 +36,25 @@
     
 </head>
 
-<body>
+<body> <!--START OF BODY -->
 
-    <!-- Loading the views -->
-    <div ui-view="header"></div> <!-- Header -->
-    <div ui-view="content"></div> <!-- Content -->
-    <div ui-view="footer"></div>  <!-- footer --> 
+    <!--LOADING THE VIEW -->
+    
+    <div ui-view="header"></div> <!-- HEADER -->
+    <div ui-view="content"></div> <!-- CONTENT -->
+    <div ui-view="footer"></div>  <!-- FOOTER --> 
 
-<script src="../bower_components/jquery/dist/jquery.min.js"></script>
-<script src="../bower_components/angular/angular.js"></script>
-<script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="scripts/app.js"></script>
-<script src="controllers/book.controller.js"></script> 
-<script src="services/book.factory.js"></script>
-<script src="controllers/author.controller.js"></script> 
-<script src="services/author.factory.js"></script>    
-</body>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="controllers/book.controller.js"></script> 
+    <script src="services/book.factory.js"></script>
+    <script src="controllers/author.controller.js"></script> 
+    <script src="services/author.factory.js"></script>    
+
+</body> <!--END OF BODY -->
+    
 </html>
 
     
