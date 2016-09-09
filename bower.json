@@ -1,0 +1,30 @@
+{
+  "name": "lms",
+  "version": "1.0.0",
+  "description": "Library Management System",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "Validation",
+    "Bootstrap",
+    "Angular"
+  ],
+  "authors": [
+    "Manthan Patel"
+  ],
+  "license": "MKP",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0",
+    "angular": "~1.4.7",
+    "angular-ui-router": "^0.3.1"
+  }
+}

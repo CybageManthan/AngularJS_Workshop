@@ -1,0 +1,26 @@
+    
+<div class="container" ng-controller="bookController">
+    <div class="jumbotron">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="text-center">ISBN</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Author</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="book in books">
+            <tr>
+                <td class="text-center"><a ui-sref="app.bookDetails({id: book.isbn})">{{book.isbn}}</a></td>
+                <td class="text-center">{{book.title}}</td>
+                <td class="text-center"><a ui-sref="app.authDetails({id: book.author})">{{book.author}}</a></td>
+            </tr>
+            </tbody>
+            </table>
+        
+        </div>
+        
+        
+    </div>
+</div>

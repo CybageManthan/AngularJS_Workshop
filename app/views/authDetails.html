@@ -1,0 +1,105 @@
+<div class="container"> <!-- start of .container -->
+
+<div class="jumbotron"> <!--start of jumbotron-->
+
+    <div class="media" ng-show="showRemoveAuthorData">
+         <div class="media-left">
+            
+            <i class="fa fa-user fa-5x" aria-hidden="true"></i>
+             
+        </div>
+        
+      <div class="media-body">
+         
+         <h4 class="media-heading"> {{author.name}}</h4>
+          
+         <h6><label>Author Id:</label>  {{author.empid}}</h6>
+         <h6><label>Email:</label> {{author.email}}</h6>
+         <h6><label>Department:</label> {{author.department}} </h6>
+        <h6><label>Website:</label> {{author.website}} </h6>
+         <h6><label>Skills:</label> <i ng-repeat = "a in author.skills track by $index"> {{a}}</i> </h6>
+
+      <a class="btn btn-primary btn-sm" ng-click="editAuthorData()" role="button">      
+      <span class="glyphicon glyphicon-edit"  aria-hidden="true"></span>	Edit</a>    
+      </div>
+        
+    </div> <!--end of media class-->
+    
+    <div ng-show="IsAuthorUpdatedRemoved"> <!--another class shown after update or remove-->
+        
+        <div  class="alert alert-success alert-margin" role="alert">{{message}}</div>
+        <a ui-sref="app" role="button" class="btn btn-sm btn-primary"> 
+          <i class="fa fa-home"  aria-hidden="true"></i>  Home</a>
+    
+    </div> <!--end -->
+    
+    
+    <div> <!-- start of form -->
+    
+    <form class="form-horizontal col-sm-offset-2" ng-show="showForm">
+     
+      <div class="form-group">
+        <label for="empid" class="col-sm-2 control-label">Author Id</label>
+        <div class="col-sm-4">
+          <input type="number" ng-model="author.empid" class="form-control" id="empid" placeholder="Author Id" disabled>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="empname" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-4">
+          <input type="text" ng-model="author.name" class="form-control" id="empname" placeholder="Author Name">
+        </div>
+      </div>
+
+      <div class="form-group">
+       <label for="empemail" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-4">
+          <input type="email" ng-model="author.email" class="form-control" id="empemail" placeholder="Author Email">
+        </div>
+      </div>
+
+       <div class="form-group">
+       <label for="empdepartment" class="col-sm-2 control-label">Department</label>
+        <div class="col-sm-4">
+          <input type="text" ng-model="author.department" class="form-control" id="empdepartment" placeholder="Author Department">
+        </div>
+      </div>
+
+       <div class="form-group">
+       <label for="empwebsite" class="col-sm-2 control-label">Website</label>
+        <div class="col-sm-4">
+          <input type="text" ng-model="author.website" class="form-control" id="empwebsite" placeholder="Author Website">
+        </div>
+      </div>
+
+      <div class="form-group">
+      <label for="avai_on" class="col-sm-2 control-label">Skills</label>
+
+        <div class="col-sm-6" >
+
+          <textarea class="form-control" ng-model="author.skills" placeholder="Add your skills with comma sepration" rows="3"></textarea>
+
+        </div>
+      </div>
+      
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+         <button type="submit" ng-click="updateAuthorData(author)" class="btn btn-sm btn-primary"> 
+          <i class="fa fa-pencil-square"  aria-hidden="true"></i>  Update</button>
+        <button type="submit" ng-click="deleteAuthorData(author.empid)" class="btn btn-sm btn-primary"> 
+          <i class="fa fa-remove"  aria-hidden="true"></i>  Delete</button>
+        </div>
+    </div>
+        
+</form>
+    
+</div>
+    
+    
+    
+    
+    
+
+</div>
+</div>

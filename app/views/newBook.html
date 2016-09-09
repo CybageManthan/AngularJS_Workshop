@@ -1,0 +1,69 @@
+<div class="container">
+
+<div class="jumbotron">
+
+<h3 class="text-center"> Book Details </h3> 
+
+<div ng-show="IsBookAdded" class="alert alert-success" role="alert">{{message}}</div>  
+    
+<form class="form-horizontal col-sm-offset-2">
+  <div class="form-group">
+    <label for="isbn" class="col-sm-2 control-label">ISBN</label>
+    <div class="col-sm-6">
+      <input type="text" ng-model="newBook.isbn" class="form-control" id="isbn" placeholder="ISBN Number">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="booktitle" class="col-sm-2 control-label">Book Title</label>
+    <div class="col-sm-6">
+      <input type="text" ng-model="newBook.title" class="form-control" id="booktitle" placeholder="Book Title">
+    </div>
+  </div>
+
+  <div class="form-group">
+   <label for="author" class="col-sm-2 control-label">Book Author</label>
+    <div class="col-sm-6">
+      <input type="text" ng-model="newBook.author" class="form-control" id="author" placeholder="Book Author">
+    </div>
+  </div>
+
+   <div class="form-group">
+   <label for="price" class="col-sm-2 control-label">Book Price</label>
+    <div class="col-sm-6">
+      <input type="number" ng-model="newBook.price" class="form-control" id="price" placeholder="Book Price">
+    </div>
+  </div>
+
+ <div class="form-group">
+  <label for="avai_on" class="col-sm-2 control-label">Available On</label>
+
+    <div class="col-sm-6" >
+    
+      <textarea class="form-control" id="avai_on" ng-model="newBook.availableOn" placeholder="Add your eCommoerce sites with comma sepration" rows="3"></textarea>
+       
+    </div>
+  </div>
+
+<!--<div class="form-group">
+    <label class="col-sm-2 control-label">Available On</label>
+    
+    <div class="checkbox-inline">
+    <input type="checkbox" name="availableOn" ng-model="newBook.availableOn.amazon" ng-true-value="Amazon">Amazon
+    </div>
+    
+    <div class="checkbox-inline">
+    <input type="checkbox" name="availableOn" ng-model="newBook.availableOn.snapdeal" ng-true-value="Snapdeal">Snapdeal
+    </div>
+    
+    </div>-->
+    
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" ng-click="addNewBook(newBook)" class="btn btn-default">Add New Book</button>
+    </div>
+  </div>
+</form>
+
+</div>
+
+</div>

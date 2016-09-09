@@ -1,0 +1,93 @@
+<div class="container">
+
+<div class="jumbotron">
+
+    <div class="media" ng-show="showRemoveBookData">
+         <div class="media-left">
+            
+            <i class="fa fa-book fa-5x" aria-hidden="true"></i>
+             
+        </div>
+        
+      <div class="media-body">
+         
+         <h4 class="media-heading"> {{book.title}}</h4>
+          
+         <h6><label>ISBN:</label>  {{book.isbn}}</h6>
+         <h6><label>Author:</label> {{book.author}}</h6>
+         <h6><label>Price:</label> {{book.price | currency}} </h6>
+         <h6><label>Available On:</label> <i ng-repeat = "a in book.availableOn track by $index"> {{a}}</i> </h6>
+         <a class="btn btn-primary btn-sm" ng-click="editBookData()" role="button">      
+        <span class="glyphicon glyphicon-edit"  aria-hidden="true"></span>	Edit</a>
+          
+      </div>
+        
+    </div> <!--end of media class -->
+    
+     <div ng-show="IsBookUpdatedRemoved"> <!--another class shown after update or remove-->
+        
+        <div  class="alert alert-success alert-margin" role="alert">{{message}}</div>
+        <a ui-sref="app" role="button" class="btn btn-sm btn-primary"> 
+          <i class="fa fa-home"  aria-hidden="true"></i>  Home</a>
+    
+    </div> <!--end -->
+    
+    
+    <div>
+     <form class="form-horizontal col-sm-offset-2" ng-show="showBookForm">
+      
+      <div class="form-group">
+        <label for="isbn" class="col-sm-2 control-label">ISBN</label>
+        <div class="col-sm-4">
+          <input type="text" ng-model="book.isbn" class="form-control" id="isbn" placeholder="ISBN Number" disabled>
+        </div> 
+      </div>
+      
+      <div class="form-group">
+        <label for="booktitle" class="col-sm-2 control-label">Book Title</label>
+        <div class="col-sm-4">
+          <input type="text" ng-model="book.title" class="form-control" id="booktitle" placeholder="Book Title">
+        </div>
+      </div>
+
+      <div class="form-group">
+       <label for="author" class="col-sm-2 control-label">Book Author</label>
+        <div class="col-sm-4">
+          <input type="text" ng-model="book.author" class="form-control" id="author" placeholder="Book Author">
+        </div>
+      </div>
+
+       <div class="form-group">
+       <label for="price" class="col-sm-2 control-label">Book Price</label>
+        <div class="col-sm-4">
+          <input type="number" ng-model="book.price" class="form-control" id="price" placeholder="Book Price">
+        </div>
+      </div>
+
+     <div class="form-group">
+      <label for="avai_on" class="col-sm-2 control-label">Available On</label>
+
+        <div class="col-sm-4" >
+
+          <textarea class="form-control" id="avai_on" ng-model="book.availableOn" placeholder="Add your eCommoerce sites with comma sepration" rows="3"></textarea>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+         <button type="submit" ng-click="updateBookData(book)" class="btn btn-sm btn-primary"> 
+          <i class="fa fa-pencil-square"  aria-hidden="true"></i>  Update</button>
+        <button type="submit" ng-click="deleteBookData(book.isbn)" class="btn btn-sm btn-primary"> 
+          <i class="fa fa-remove"  aria-hidden="true"></i>  Delete</button>
+        </div>
+    </div>
+    
+ </form>
+
+</div>
+    
+    
+
+</div>
+</div>
