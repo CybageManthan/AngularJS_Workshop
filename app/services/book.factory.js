@@ -2,22 +2,27 @@
 /*--------------------AJAX REQUESTS AND SERVICING CONTROLLER WITH REQUIRED DATA --------------*/
 /*-------------------------- USAGE OF PROMISE. $Q AND $HTTP SERVICES.*/
 
+'use strict';
+
+(function(angular) {
 
 angular.module('mainApp')
 
 .constant('baseUrl','http://172.27.12.104:3000')
 
-.factory('bookFactory', function($http,$q,baseUrl) {
+.factory('bookFactory',['$http','$q','baseUrl',function($http,$q,baseUrl) {
  
    /*CREATE ONE OBJECT*/          
 
-    var bookfac = {};
+    var bookFactory = {};
 
    /*GET REQUEST TO FETCH ALL BOOKS */
     
-    bookfac.getBooks = function() {
+    bookFactory.getBooks = function() {
+
+/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */        
         
-        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */
+/*    var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
         
             $http({
 
@@ -26,24 +31,35 @@ angular.module('mainApp')
 
             }).success(function(data){
 
-                deferred.resolve(data); /*ON SUCCESS RESOLVED THE DATA*/
+                deferred.resolve(data); ON SUCCESS RESOLVED THE DATA
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*ON FAILURE SHOW THE ERROR*/
+                deferred.reject('There was an error'); ON FAILURE SHOW THE ERROR
 
             })
 
-            return deferred.promise; /*RETURNING THE PROMISE*/
-
-            };
+            return deferred.promise;  RETURNING THE PROMISE  */ 
+        
+        
+/* --------------------------------- OR ------------------------------------ */          
+        
+        return $http.get(baseUrl+'/book/list').then(function(respond){
+           
+                    return respond.data;
+        });
         
 
+    };
+        
+
+  
     /*POST REQUEST TO FETCH THE EXISTING BOOK BASED ON PARAMETER */
     
-    bookfac.getBook = function(isbn) {
+    bookFactory.getBook = function(isbn) {
 
-        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */
+/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */        
+/*        var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
          
         $http({
 
@@ -54,23 +70,42 @@ angular.module('mainApp')
 
             }).success(function(data){
                 
-                deferred.resolve(data); /*ON SUCCESS RESOLVED THE DATA*/
+                deferred.resolve(data); ON SUCCESS RESOLVED THE DATA
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*ON FAILURE SHOW THE ERROR*/
+                deferred.reject('There was an error'); ON FAILURE SHOW THE ERROR
 
             })
 
-            return deferred.promise; /*RETURNING THE PROMISE*/
+            return deferred.promise; RETURNING THE PROMISE*/
+        
+        
+/* --------------------------------- OR ------------------------------------ ------------------*/                  
+        
+            var header = {
+                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
+            }
+            
+            var data  = { "isbn" : isbn };
+        
+            return $http.post(baseUrl+'/book/byisbn',data,header).then(function(respond){
+                
+                     return respond.data;
+                });
 
             };
     
+    
+    
+    
     /*POST REQUEST TO CREATE A NEW BOOK */
     
-     bookfac.createBook = function(newBook) {
-
-         var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */  
+     bookFactory.createBook = function(newBook) {
+         
+/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */ 
+         
+/*         var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
         
         $http({
 
@@ -81,15 +116,27 @@ angular.module('mainApp')
                 headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(data){
                 
-                deferred.resolve(data); /*ON SUCCESS RESOLVED THE DATA*/
+                deferred.resolve(data); ON SUCCESS RESOLVED THE DATA
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*ON FAILURE SHOW THE ERROR*/
+                deferred.reject('There was an error'); ON FAILURE SHOW THE ERROR
 
             })
 
-            return deferred.promise; /*RETURNING THE PROMISE*/
+            return deferred.promise; RETURNING THE PROMISE */
+
+/* --------------------------------- OR ------------------------------------ ------------------*/                    
+            var header = {
+                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
+            }
+            
+            return $http.post(baseUrl+'/book/new',newBook,header).then(function(respond){
+                
+                    return respond.data;
+            });         
+         
+         
 
         }; /*end of New Book function */
     
@@ -97,9 +144,11 @@ angular.module('mainApp')
     
      /*PUT REQUEST TO UPDATE THE EXISTING BOOK*/
     
-     bookfac.updateBook = function(book) {
-        
-        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */  
+     bookFactory.updateBook = function(book) {
+
+/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */ 
+         
+/*        var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
         
         $http({
 
@@ -109,23 +158,35 @@ angular.module('mainApp')
                 headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(data){
                 
-                deferred.resolve(data); /*ON SUCCESS RESOLVED THE DATA*/
+                deferred.resolve(data); ON SUCCESS RESOLVED THE DATA
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*ON FAILURE SHOW THE ERROR*/
+                deferred.reject('There was an error'); ON FAILURE SHOW THE ERROR
 
             })
 
-            return deferred.promise; /*RETURNING THE PROMISE*/
+            return deferred.promise; RETURNING THE PROMISE*/
+         
+/* --------------------------------- OR ------------------------------------ ------------------*/           
+            var header = {
+                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
+            }
+            
+            return $http.put(baseUrl+'/book/update',book,header).then(function(respond){
+                
+                    return respond.data;
+            });             
+         
         
     };
     
     
     /*DELETE REQUEST TO REMOVE THE EXISTING BOOK */
     
-    bookfac.removeBook = function(bookID) {
-        
+    bookFactory.removeBook = function(bookID) {
+
+/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */        
         var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */  
         
         $http({
@@ -146,9 +207,27 @@ angular.module('mainApp')
 
             return deferred.promise; /*RETURNING THE PROMISE*/
         
+/*-----------------------------------------------OR(NOT WORKING) ---------------------------  */
+
+/*          var data = { isbn: bookID };
+      
+            var header =  {
+                        
+                        'Content-type':'application/json; charset=UTF-8',
+             }
+             
+            return $http.delete(baseUrl+'/book/remove',JSON.stringify(data),header)
+                        .then(function(respond){
+                
+                    return respond.data;
+            });        
+ */       
+        
     };
     
 
-    return bookfac; /* RETURN THE FACTORY OBJECT TO CONTROLLER*/
+    return bookFactory; /* RETURN THE FACTORY OBJECT TO CONTROLLER*/
 
- }); /*END OF FACTORY*/
+ }]); /*END OF FACTORY*/
+    
+})(angular);

@@ -2,11 +2,16 @@
 /*-------------------------------CREATE/UPDATE/DELETE/GET BOOK------------------------*/
 /*---------------CONTROLLER USES FACTORY OBJECT'S METHODS-----------------------------*/
 
+'use strict';
+
+(function(angular) {
+    
 angular.module('mainApp')
 
 .controller('bookController',['$scope','$stateParams','bookFactory',function($scope,$stateParams,bookFactory){
 
-
+    $scope.books = [];
+    
     /* FETCH BOOKS DATA TO DISPLAY ON THE HOME PAGE */
     
 	bookFactory.getBooks().then(function(data){
@@ -16,7 +21,7 @@ angular.module('mainApp')
             },
             function(data) {
             
-                alert(data); /*ON FAILURE*/
+                /*ON FAILURE*/
             });
         
     
@@ -53,7 +58,7 @@ angular.module('mainApp')
             
             /*ON FAILURE*/
         });
-    }
+    };
     
     
     /*DISPLAYING THE FORM WHEN USER CLICK ON THE EDIT BUTTION */
@@ -103,3 +108,5 @@ angular.module('mainApp')
 
         
 }]); /*END OF CONTROLLER*/
+    
+})(angular);

@@ -2,10 +2,12 @@
 
 'use strict';
 
+(function(angular) {
+
 
 angular.module('mainApp',['ui.router'])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
 
@@ -92,6 +94,7 @@ angular.module('mainApp',['ui.router'])
 
     $urlRouterProvider.otherwise('/'); /*DEFAULT VIEW*/
 
-});        
+}]);        
 
+ })(angular);
 

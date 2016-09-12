@@ -1,0 +1,39 @@
+<!--THIS VIEW DEFINES THE HEADER OF OUR SPA -->
+
+<header> <!--START OF HEADER -->
+    
+<div class="container-fluid"> <!--START OF CONTAINER FLUID-->
+    <div class="row">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" ui-sref="app">
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>  Library Management System</a>
+                </div>
+
+            </div>
+        </nav>
+    
+    </div>
+</div> <!--END OF CONTAINER FLUID-->
+
+<div class="container wrapper"> <!--START OF CONTAINER -->
+<div class="row">
+     
+     <div class="col-xs-6 text-center">
+
+        <a ui-sref="app.newBook" class="btn btn-primary btn-sm" role="button">
+         <i class="fa fa-file" aria-hidden="true"></i> Add New Book</a>
+        
+     </div>
+
+     <div class="col-xs-6 text-center">
+        
+        <a ui-sref="app.newAuthor" class="btn btn-primary btn-sm" role="button">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>  Add New Author</a>
+        
+     </div>
+    </div>
+</div> <!--END OF CONTAINER-->
+
+</header> <!--END OF HEADER-->

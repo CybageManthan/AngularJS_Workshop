@@ -2,6 +2,10 @@
 /*-------------------------------CREATE/UPDATE/DELETE/GET AUTHOR------------------------*/
 /*---------------CONTROLLER USES FACTORY OBJECT'S METHODS-----------------------------*/
 
+'use strict';
+
+(function(angular) {
+    
 angular.module('mainApp')
 
 .controller('authController',['$scope','$stateParams','authorFactory',function($scope,$stateParams,authorFactory){
@@ -41,7 +45,7 @@ angular.module('mainApp')
             
             /*ON FAILURE*/
         });
-    }
+    };
     
     
     /*DISPLAYING THE FORM WHEN USER CLICK ON EDIT BUTTON */
@@ -89,3 +93,5 @@ angular.module('mainApp')
     
     
 }]); /*END OF CONTROLLER*/
+    
+})(angular);

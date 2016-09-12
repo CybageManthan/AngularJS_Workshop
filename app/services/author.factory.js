@@ -2,21 +2,26 @@
 /*--------------------AJAX REQUESTS AND SERVICING CONTROLLER WITH REQUIRED DATA --------------*/
 /*-------------------------- USAGE OF PROMISE. $Q AND $HTTP SERVICES.*/
 
+'use strict';
+
+(function(angular) {
+
 angular.module('mainApp')
 
-.factory('authorFactory', function($http,$q,baseUrl) {
+.factory('authorFactory',['$http','$q','baseUrl', function($http,$q,baseUrl) {
  
     /*CREATE ONE OBJECT*/        
 
-    var authfac = {};
+    var authorFactory = {};
 
     
     /*GET REQUEST TO FETCH EXISTING USER BASED ON PARAMETER */
     
-    authfac.getAuthor = function(author) {
+    authorFactory.getAuthor = function(author) {
+
+/*-------------------------  YOU CAN USE PROMISE ------------------------------------------------*/  
         
-        
-        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */
+ /*       var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
          
         $http({
 
@@ -27,24 +32,40 @@ angular.module('mainApp')
 
             }).success(function(data){
                 
-                deferred.resolve(data); /*ON SUCCESS RESOLVE DATA */
+                deferred.resolve(data); ON SUCCESS RESOLVE DATA 
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*ON FAILURE SHOW ERROR*/
+                deferred.reject('There was an error'); ON FAILURE SHOW ERROR
 
             })
 
-            return deferred.promise; /*RETURN THE PROMISE*/
+            return deferred.promise; RETURN THE PROMISE*/
+        
+
+/* --------------------------------- OR -------------------------------------------------------*/                  
+        
+            var header = {
+                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
+            }
+            
+            var data  = { "name" : author };
+        
+            return $http.post(baseUrl+'/author/byname',data,header).then(function(respond){
+                
+                     return respond.data;
+                });    
 
     };
     
     
     /*POST REQUST TO CREATE A NEW AUTHOR */
     
-    authfac.createAuthor = function(newAuthor) {
-      
-        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */  
+    authorFactory.createAuthor = function(newAuthor) {
+
+/*-------------------------  YOU CAN USE PROMISE ------------------------------------------------*/  
+        
+ /*       var deferred = $q.defer();    CREATING A DEFERRED OBJECT   
         
         $http({
 
@@ -55,24 +76,35 @@ angular.module('mainApp')
                 headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(data){
                 
-                deferred.resolve(data); /*ON SUCCESS RESOLVE DATA */
+                deferred.resolve(data); ON SUCCESS RESOLVE DATA 
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*ON FAILURE SHOW ERROR*/
+                deferred.reject('There was an error'); ON FAILURE SHOW ERROR
 
             })
 
-            return deferred.promise; /*RETURN THE PROMISE*/
+            return deferred.promise; RETURN THE PROMISE*/
+        
+/* --------------------------------- OR ------------------------------------ ------------------*/                    
+            var header = {
+                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
+            }
+            
+            return $http.post(baseUrl+'/author/new',newAuthor,header).then(function(respond){
+                
+                    return respond.data;
+            });                 
 
     };
     
     
     /* PUT REQUEST TO UPDATE THE EXISTING AUTHOR */
     
-    authfac.updateAuthor = function(author) {
+    authorFactory.updateAuthor = function(author) {
         
-        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */ 
+/*-------------------------  YOU CAN USE PROMISE ------------------------------------------------*/          
+       /* var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
         
         $http({
 
@@ -82,24 +114,36 @@ angular.module('mainApp')
                 headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(data){
                 
-                deferred.resolve(data); /*ON SUCCESS RESOLVE DATA */
+                deferred.resolve(data); ON SUCCESS RESOLVE DATA 
 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*ON FAILURE SHOW ERROR*/
+                deferred.reject('There was an error'); ON FAILURE SHOW ERROR
 
             })
 
-            return deferred.promise; /*RETURN THE PROMISE*/
+            return deferred.promise; RETURN THE PROMISE*/
+        
+/* --------------------------------- OR ------------------------------------ ------------------*/           
+            var header = {
+                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
+            }
+            
+            return $http.put(baseUrl+'/author/update',author,header).then(function(respond){
+                
+                    return respond.data;
+            });           
         
     };
     
     
     /*DELETE REQUEST TO REMOVE THE EXSITING AUTHOR */
     
-    authfac.removeAuthor = function(authorID) {
+    authorFactory.removeAuthor = function(authorID) {
         
-        var deferred = $q.defer();   /*CREATING A DEFERRED OBJECT */  
+/*-------------------------  YOU CAN USE PROMISE ------------------------------------------------*/  
+        
+        var deferred = $q.defer();   /*CREATING A DEFERRED OBJECT*/  
         
         $http({
 
@@ -109,19 +153,37 @@ angular.module('mainApp')
                 headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
             }).success(function(data){
                 
-                deferred.resolve(data); /*ON SUCCESS RESOLVE DATA */
+                deferred.resolve(data); /* ON SUCCESS RESOLVE DATA */
                 
             }).error(function(data){
  
-                deferred.reject('There was an error'); /*ON FAILURE SHOW ERROR*/
+                deferred.reject('There was an error'); /* ON FAILURE SHOW ERROR*/
 
             })
 
             return deferred.promise; /*RETURN THE PROMISE*/
         
+/*-----------------------------------------------OR(NOT WORKING) ---------------------------  */
+
+/*          var data = { empid: authorID };
+      
+            var header =  {
+                        
+                        'Content-type':'application/json; charset=UTF-8',
+             }
+             
+            return $http.delete(baseUrl+'/author/remove',JSON.stringify(data),header)
+                        .then(function(respond){
+                
+                    return respond.data;
+            });        
+                */
+        
     };
     
     
-  return authfac; /* RETURN THE FACTORY OBJECT TO CONTROLLER */
+  return authorFactory; /* RETURN THE FACTORY OBJECT TO CONTROLLER */
 
- }); /* END OF FACTORY*/
+ }]); /* END OF FACTORY*/
+    
+})(angular);
