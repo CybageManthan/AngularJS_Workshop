@@ -3,30 +3,30 @@
 ###THIS APPLICATION DEMONSTRATE THE USAGE OF
 
 * Angular
-    *  i.SPA.
-    *  ii.Angular Routing,Angular 2 way Binding, Factories,controller,filters.
-    *  iii. $http,$q services of Angular.
+    *  SPA.
+    *  Angular Routing,Angular 2 way Binding, Factories,controller,filters.
+    *  $http,$q services of Angular.
 * Bower
 * Bootstrap and Font-Awesome
 * Testing Framework
-    * i. Jasmine and Karma
+    * Jasmine and Karma
 * Task Runnner
-   * i. Gulp
+   * Gulp
     
 * app folder have all the code of application.
-  * 1. services dir : factories implement.
-  * 2. controllers dir: controller logic.
-  * 3. views dir : all the views
-  * 4. script dir : js files
+  * services dir : factories implement.
+  * controllers dir: controller logic.
+  * views dir : all the views
+  * script dir : js files
 
 * dist folder is the folder use for production and running the application . 
    
-   * i. gulp will create the dist folder.
+   * gulp will create the dist folder.
 
 * test folder have karma configuratio file and test-suits in unit-test folder for
     
-   *    i. bookcontroller and bookfactory
-   *    ii. authorcontroller and authorfactory
+   *  bookcontroller and bookfactory
+   *  authorcontroller and authorfactory
 
 * bower_components have front-end dependencies.
 
