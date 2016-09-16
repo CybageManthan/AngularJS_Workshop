@@ -5,18 +5,47 @@
     <div class="jumbotron"> <!--START OF JUMBOTRON-->
         
         <div class="table-responsive">  <!--START OF TABLE-->
-        
-            <input type="text" ng-model="searchBooks" class="form-control search-margin" placeholder="Search Books by ISBN or Title or Author">    
+            
+              <form> <!--SEARCH BOX -->
+                <div class="form-group">
+                  <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search Books by ISBN or Title or Author" ng-model="searchBooks">
+                  </div>      
+                </div>
+              </form>
+            
             
             <table class="table table-bordered">
             <thead>
             <tr>
-                <th class="text-center">ISBN</th>
-                <th class="text-center">Title</th>
-                <th class="text-center">Author</th>
+              <th class="text-center">  
+                 <a ng-click="sortType = 'isbn'; sortReverse = !sortReverse">
+                  ISBN
+                   <i ng-show ="sortType == 'isbn' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show ="sortType == 'isbn' && sortReverse" class="fa fa-caret-up"></i>       
+                  </a>
+               </th>
+            
+              <th class="text-center">
+                  <a ng-click="sortType = 'title'; sortReverse = !sortReverse">
+                      Title
+                      <i ng-show ="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></i>
+                      <i ng-show ="sortType == 'title' && sortReverse" class="fa fa-caret-up"></i>
+                  </a>
+                </th>
+                
+              <th class="text-center">
+                 <a ng-click="sortType = 'author'; sortReverse = !sortReverse">
+                        Author
+                   <i ng-show ="sortType == 'author' && !sortReverse" class="fa fa-caret-down"></i>
+                    <i ng-show ="sortType == 'author' && sortReverse" class="fa fa-caret-up"></i>  
+                  </a>
+              </th>    
+ 
             </tr>
             </thead>
-            <tbody ng-repeat="book in books | filter : searchBooks ">
+            <tbody ng-repeat="book in books | orderBy:sortType:sortReverse | filter : searchBooks ">
             <tr>
                 <td class="text-center"><a ui-sref="app.bookDetails({id: book.isbn})">{{book.isbn}}</a></td>
                 <td class="text-center">{{book.title}}</td>

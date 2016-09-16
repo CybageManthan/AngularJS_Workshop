@@ -8,11 +8,19 @@
     
 angular.module('mainApp')
 
+    /*
+       * CONTROLLER METHOD OF ANGULAR
+       * @param FIRST PARAMETER IS CONTROLLER NAME.
+       * @param SECOND PARAMETER IS DEPENDENCIES INJECTION
+    */
+
 .controller('authController',['$scope','$stateParams','authorFactory',function($scope,$stateParams,authorFactory){
 
-
-    /*DISPLAYING THE AUTHOR DATA */
-      
+    /*
+       * FUNCTION TO DISPLAY SINGLE AUTHOR DATA.
+       * @param AUTHOR(i.e. AUTHORNAME) THIS IS THE FIRST PARAMETER TO GETAUTHOR METHOD
+       * @onSucess DISPLAY DATA TO THE USER
+    */  
     authorFactory.getAuthor($stateParams.id).then(function(data){
             
             /*ON SUCCESS*/
@@ -24,10 +32,14 @@ angular.module('mainApp')
             function(data) {
             
                  /* ON FAILURE*/
-            });
-    
         
-    /*FUNCTION TO CREATE A NEW AUTHOR*/
+            }); /*END OF .getAuthor() FUNCTION*/
+    
+    /*
+       * FUNCTION TO CREATE A NEW AUTHOR
+       * @param AUTHOR OBJECT WITH THE NEW DATA.
+       * @onSuccess DISPLAY MESSAGE TO THE USER AND SET THE FLAGS FOR NG_SHOW AND NG_HIDE
+    */
     
     $scope.addNewAuthor = function(newAuthor) {
         
@@ -45,10 +57,11 @@ angular.module('mainApp')
             
             /*ON FAILURE*/
         });
-    };
+    
+    }; /*END OF .addNewAuthor() FUNCTION */
     
     
-    /*DISPLAYING THE FORM WHEN USER CLICK ON EDIT BUTTON */
+    /* FUNCTION DISPLAY THE FORM WHEN USER CLICK ON EDIT BUTTON */
     
     $scope.editAuthorData = function() {
  
@@ -57,7 +70,11 @@ angular.module('mainApp')
     };
     
     
-    /* FUNCTION TO UPDATE THE AUTHOR DATA */
+    /*
+       * FUNCTION TO UPDATE THE AUTHOR DATA
+       * @param AUTHOR OBJECT WITH THE UPDATED DATA.
+       * @onSuccess DISPLAY MESSAGE TO THE USER AND SET THE FLAGS FOR NG_SHOW AND NG_HIDE
+    */
     
     $scope.updateAuthorData = function(author) {
         
@@ -74,8 +91,11 @@ angular.module('mainApp')
         
     };
     
-   
-    /* FUNCTION TO DELETE THE EXISTING AUTHOR */
+    /*
+       * FUNCTION TO DELETE THE EXISTING AUTHOR.
+       * @param ID OF AUTHOR YOU WANT TO DELETE.
+       * @onSuccess DISPLAY MESSAGE TO THE USER AND SET THE FLAGS FOR NG_SHOW AND NG_HIDE
+    */
     
     $scope.deleteAuthorData = function(authorID) {
         
@@ -87,11 +107,9 @@ angular.module('mainApp')
             $scope.showForm = !$scope.showForm;
         });
         
-    };
+    }; /*END OF .deleteAuthorData() FUNCTION*/
     
-    
-    
-    
+
 }]); /*END OF CONTROLLER*/
     
 })(angular);

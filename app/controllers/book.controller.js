@@ -8,12 +8,22 @@
     
 angular.module('mainApp')
 
+    /*
+       * CONTROLLER METHOD OF ANGULAR
+       * @param FIRST PARAMETER IS CONTROLLER NAME.
+       * @param SECOND PARAMETER IS DEPENDENCIES INJECTION
+    */
+
 .controller('bookController',['$scope','$stateParams','bookFactory',function($scope,$stateParams,bookFactory){
 
     $scope.books = [];
+    $scope.sortType = 'isbn';
+    $scope.sortReverse = false;
     
-    /* FETCH BOOKS DATA TO DISPLAY ON THE HOME PAGE */
-    
+    /*
+       * FUNCTION TO DISPLAY BOOKS DATA.
+       * @onSucess DISPLAY DATA TO THE USER(HOME PAGE)
+    */ 
 	bookFactory.getBooks().then(function(data){
             
             $scope.books = data ; /*ON SUCCESS*/
@@ -22,12 +32,14 @@ angular.module('mainApp')
             function(data) {
             
                 /*ON FAILURE*/
-            });
+     });
         
-    
-    
-    /* FUNCTION TO FETCH EXISTING BOOK DATA */
-    
+
+    /*
+       * FUNCTION TO DISPLAY EXISTING BOOK DATA.
+       * @param BOOK-ISBN NUMBER
+       * @onSucess DISPLAY DATA TO THE USER
+    */ 
     bookFactory.getBook($stateParams.id).then(function(data){
             
             /*ON SUCCESS*/
@@ -38,11 +50,14 @@ angular.module('mainApp')
             function(data) {
             
                 /*ON FAILURE*/
-            });
+     });
     
     
-    /*FUNCTION TO CREATE A NEW BOOK */
-    
+    /*
+       * FUNCTION TO CREATE A NEW BOOK
+       * @param BOOK OBJECT WITH THE NEW DATA.
+       * @onSuccess DISPLAY MESSAGE TO THE USER AND SET THE FLAGS FOR NG_SHOW AND NG_HIDE
+    */
     $scope.addNewBook = function(newBook) {
         
         bookFactory.createBook(newBook).then(function(data){
@@ -58,11 +73,12 @@ angular.module('mainApp')
             
             /*ON FAILURE*/
         });
-    };
+    
+    }; /*END OF .addNewBook() FUNCTION */
     
     
-    /*DISPLAYING THE FORM WHEN USER CLICK ON THE EDIT BUTTION */
-    
+    /*FUNCTION TO DISPLAY WHEN USER CLICK ON THE EDIT BUTTION */
+   
     $scope.editBookData = function() {
  
         $scope.showBookForm = !$scope.showBookForm;
@@ -70,7 +86,11 @@ angular.module('mainApp')
     };
     
     
-    /*FUNCTION TU UPDATE THE EXISTING BOOK */
+    /*
+       * FUNCTION TU UPDATE THE EXISTING BOOK
+       * @param BOOK OBJECT WITH THE UPDATED DATA.
+       * @onSuccess DISPLAY MESSAGE TO THE USER AND SET THE FLAGS FOR NG_SHOW AND NG_HIDE
+    */
     
     $scope.updateBookData = function(book) {
         
@@ -85,11 +105,14 @@ angular.module('mainApp')
             
         });
         
-    };
+    }; /*END OF .updateBookData() FUNCTION */
     
-   
-    /*FUNCTION TO DELETE THE EXISTING BOOK */
     
+    /*
+       * FUNCTION TO DELETE THE EXISTING BOOK.
+       * @param BOOK ISBN ID WHICH YOU WANT TO REMOVE
+       * @onSuccess DISPLAY MESSAGE TO THE USER AND SET THE FLAGS FOR NG_SHOW AND NG_HIDE
+    */
     $scope.deleteBookData = function(bookID) {
         
         bookFactory.removeBook(bookID).then(function(data){
@@ -102,7 +125,7 @@ angular.module('mainApp')
             $scope.showBookForm = !$scope.showBookForm;
         });
         
-    };
+    };  /*END OF .deleteBookData() FUNCTION */
     
     
 

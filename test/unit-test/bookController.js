@@ -245,7 +245,7 @@ describe('Controller: bookController',function(){
             
         });
         
-        it('SHOLD CREATE SINGLE BOOK ',function(){
+        it('SHOULD CREATE SINGLE BOOK ',function(){
             $httpBackend.whenPOST("http://172.27.12.104:3000/book/new").respond(200,$q.when(response));
             
             expect(scope.addNewBook).not.toHaveBeenCalled();

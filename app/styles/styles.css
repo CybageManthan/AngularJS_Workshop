@@ -21,3 +21,9 @@
     font-weight: bold;
     color:red;
 }
+
+th.text-center a {
+    
+    text-decoration: none;
+    
+}

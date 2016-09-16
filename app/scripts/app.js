@@ -4,8 +4,12 @@
 
 (function(angular) {
 
-
 angular.module('mainApp',['ui.router'])
+
+    /*
+        * FUNCTION TO CONFIG THE ROUTES OF THE APPLICATION>
+        * @param IS THE DEPENDENCIES THAT ARE REQUIRE FOR ROUTING
+    */
 
 .config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 

@@ -1,5 +1,5 @@
 /*-----------------------------------FACTORY FOR BOOK---------------------------*/
-/*--------------------AJAX REQUESTS AND SERVICING CONTROLLER WITH REQUIRED DATA --------------*/
+/*---------------AJAX REQUESTS AND SERVICING CONTROLLER WITH REQUIRED DATA --------------*/
 /*-------------------------- USAGE OF PROMISE. $Q AND $HTTP SERVICES.*/
 
 'use strict';
@@ -8,225 +8,199 @@
 
 angular.module('mainApp')
 
+/*CONSTANT VALUE FOR ANGULAR APPLICATION*/
+
 .constant('baseUrl','http://172.27.12.104:3000')
 
-.factory('bookFactory',['$http','$q','baseUrl',function($http,$q,baseUrl) {
+/*
+    * RUN METHOD FOR PROVIDER TO MAKE HTTP SERVICE AVAILABLE THROUOUT APPLICATION
+    * @param FIRST PARAMETER IS THE PROVIDER NAME
+    * @param SECOND PARAMETER IS THE $HTTP SERVICE
+    # @param THIRD PARAMETER IS THE BASEURL - CONSTANT WE HAVE DEFINED EARLIER.
+*/
+
+.run(function(commonServiceProvider,$http,baseUrl){
+      
+    commonServiceProvider.getDataUsingHTTPService = function (Url,Method,Data) {
+            
+            return $http({
+            
+                        url:baseUrl+Url,
+                        method:Method,
+                        data:Data,
+                        headers : {'Content-Type' : 'application/json; charset=UTF-8'}
+                
+                    })
+            
+            };
+    
+}) /*END OF RUN METHOD*/
+
+/*
+       * FACTORY METHOD OF ANGULAR
+       * @param FIRST PARAMETER IS FACTORY NAME.
+       * @param SECOND PARAMETER IS DEPENDENCIES INJECTION
+       * @return OBJECT TO THE CONTROLLER
+*/
+
+.factory('bookFactory',['$http','$q', 'commonServiceProvider',function($http,$q,commonServiceProvider) {
  
    /*CREATE ONE OBJECT*/          
 
     var bookFactory = {};
-
-   /*GET REQUEST TO FETCH ALL BOOKS */
+   
+    /*
+       * GET REQUEST TO FETCH ALL BOOKS .
+       * @return RESPOND DATA TO THE CONTROLLER (SUCCESS OR ERROR)
+    */
     
     bookFactory.getBooks = function() {
-
-/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */        
         
-/*    var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
+        /*
+           * ANGULAR PROVIDER METHOD TO GET REQUIRED DATA USING HTTP SERVICES
+           * @param URL-FROM WHERE TO FETCH THE DATA
+           * @param HTTP METHOD
+           * @param REQUEST DATA
+           * @return RESPONSE (PROMISE)
+        */
         
-            $http({
+        return commonServiceProvider.getDataUsingHTTPService('/book/list','GET','').
+        then(function(respond){
+            
+            return respond.data;
+            
+        })
 
-                method:'GET',
-                url: baseUrl + '/book/list',
+    }; /*END OF .getBooks() METHOD */
+    
 
-            }).success(function(data){
-
-                deferred.resolve(data); ON SUCCESS RESOLVED THE DATA
-
-            }).error(function(data){
- 
-                deferred.reject('There was an error'); ON FAILURE SHOW THE ERROR
-
-            })
-
-            return deferred.promise;  RETURNING THE PROMISE  */ 
-        
-        
-/* --------------------------------- OR ------------------------------------ */          
-        
-        return $http.get(baseUrl+'/book/list').then(function(respond){
-           
-                    return respond.data;
-        });
-        
-
-    };
-        
-
-  
-    /*POST REQUEST TO FETCH THE EXISTING BOOK BASED ON PARAMETER */
+    /*
+       * POST REQUEST TO FETCH THE EXISTING BOOK BASED ON PARAMETER.
+       * @param - PARAMETER IS THE ISBN NUMBER OF THE BOOK.
+       * @return RESPOND DATA TO THE CONTROLLER (SUCCESS OR ERROR)
+    */
     
     bookFactory.getBook = function(isbn) {
 
-/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */        
-/*        var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
-         
-        $http({
-
-                method:'POST',
-                url: baseUrl+'/book/byisbn',
-                data:'isbn='+isbn+'',
-                headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
-
-            }).success(function(data){
+        
+        var data  = { "isbn" : isbn };
+        
+        /*
+           * ANGULAR PROVIDER METHOD TO GET REQUIRED DATA USING HTTP SERVICES
+           * @param URL-FROM WHERE TO FETCH THE DATA
+           * @param HTTP METHOD
+           * @param REQUEST DATA
+           * @return RESPONSE (PROMISE)
+        */
+        
+        return commonServiceProvider.getDataUsingHTTPService('/book/byisbn','POST',data)
                 
-                deferred.resolve(data); ON SUCCESS RESOLVED THE DATA
-
-            }).error(function(data){
- 
-                deferred.reject('There was an error'); ON FAILURE SHOW THE ERROR
-
-            })
-
-            return deferred.promise; RETURNING THE PROMISE*/
-        
-        
-/* --------------------------------- OR ------------------------------------ ------------------*/                  
-        
-            var header = {
-                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-            }
+                .then(function(respond){
             
-            var data  = { "isbn" : isbn };
-        
-            return $http.post(baseUrl+'/book/byisbn',data,header).then(function(respond){
-                
-                     return respond.data;
-                });
-
-            };
+            return respond.data;
+            
+        })    
     
     
+    }; /* END OF .getBook() FUNCTION */
     
     
-    /*POST REQUEST TO CREATE A NEW BOOK */
+    /*
+       * POST REQUEST TO CREATE A NEW BOOK .
+       * @param - BOOK OBJECT WITH THE NEW DATA
+       * @return RESPOND DATA TO THE CONTROLLER (SUCCESS OR ERROR)
+    */
     
      bookFactory.createBook = function(newBook) {
-         
-/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */ 
-         
-/*         var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
-        
-        $http({
-
-                method:'POST',
-                dataType:'JSON',
-                url: baseUrl+'/book/new',
-                data:$.param(newBook),
-                headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
-            }).success(function(data){
-                
-                deferred.resolve(data); ON SUCCESS RESOLVED THE DATA
-
-            }).error(function(data){
- 
-                deferred.reject('There was an error'); ON FAILURE SHOW THE ERROR
-
-            })
-
-            return deferred.promise; RETURNING THE PROMISE */
-
-/* --------------------------------- OR ------------------------------------ ------------------*/                    
-            var header = {
-                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-            }
             
-            return $http.post(baseUrl+'/book/new',newBook,header).then(function(respond){
-                
-                    return respond.data;
-            });         
-         
-         
-
-        }; /*end of New Book function */
-    
-   
-    
-     /*PUT REQUEST TO UPDATE THE EXISTING BOOK*/
-    
-     bookFactory.updateBook = function(book) {
-
-/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */ 
-         
-/*        var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
-        
-        $http({
-
-                method:'PUT',
-                url: baseUrl+'/book/update',
-                data:$.param(book),
-                headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
-            }).success(function(data){
-                
-                deferred.resolve(data); ON SUCCESS RESOLVED THE DATA
-
-            }).error(function(data){
- 
-                deferred.reject('There was an error'); ON FAILURE SHOW THE ERROR
-
-            })
-
-            return deferred.promise; RETURNING THE PROMISE*/
-         
-/* --------------------------------- OR ------------------------------------ ------------------*/           
-            var header = {
-                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-            }
+            console.log(newBook.availableOn);
             
-            return $http.put(baseUrl+'/book/update',book,header).then(function(respond){
+            var newAuthorJSONFormat = {
                 
-                    return respond.data;
-            });             
+                "isbn" : newBook.isbn,
+                "title"  : newBook.title,
+                "author" : newBook.author,
+                "price" : newBook.price,
+                "availableOn" : newBook.availableOn.toString().split(',') 
+            };   
+            
+        /*
+           * ANGULAR PROVIDER METHOD TO GET REQUIRED DATA USING HTTP SERVICES
+           * @param URL-FROM WHERE TO FETCH THE DATA
+           * @param HTTP METHOD
+           * @param REQUEST DATA
+           * @return RESPONSE (PROMISE)
+        */
          
+         
+       /* return commonServiceProvider.getDataUsingHTTPService('/book/new','POST',newAuthorJSONFormat).then(function(respond){
+
+            return respond.data;
+            
+            }) */  
+         
+
+        }; /*END OF .createBook() FUNCTION */
+    
+    
+    /*
+       * PUT REQUEST TO UPDATE THE EXISTING BOOK .
+       * @param - BOOK OBJECT WITH THE UPDATED DATA
+       * @return RESPOND DATA TO THE CONTROLLER (SUCCESS OR ERROR)
+    */
+    
+    bookFactory.updateBook = function(book) {
+    
+    /*
+           * ANGULAR PROVIDER METHOD TO GET REQUIRED DATA USING HTTP SERVICES
+           * @param URL-FROM WHERE TO FETCH THE DATA
+           * @param HTTP METHOD
+           * @param REQUEST DATA
+           * @return RESPONSE (PROMISE)
+     */    
         
-    };
+    return commonServiceProvider.getDataUsingHTTPService('/book/update','PUT',book)
+                
+                .then(function(respond){
+            
+            return respond.data;
+            
+        })   
+  
+    }; /*END OF .updateBook() FUNCTION*/
     
     
-    /*DELETE REQUEST TO REMOVE THE EXISTING BOOK */
+    /*
+       * DELETE REQUEST TO REMOVE THE EXISTING BOOK.
+       * @param - bookID ID Of BOOK WHICH YOU WANT TO REMOVE
+       * @return RESPOND DATA TO THE CONTROLLER (SUCCESS OR ERROR)
+    */
     
     bookFactory.removeBook = function(bookID) {
 
-/* --------------------------------- YOU CAN USE PROMISE ------------------------------------ */        
-        var deferred = $q.defer();    /*CREATING A DEFERRED OBJECT */  
+        var data = {"isbn":bookID};
         
-        $http({
-
-                method:'DELETE',
-                url: baseUrl+'/book/remove',
-                data:'isbn='+bookID+'',
-                headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
-            }).success(function(data){
-                
-                deferred.resolve(data); /*ON SUCCESS RESOLVED THE DATA*/
-                
-            }).error(function(data){
- 
-                deferred.reject('There was an error'); /*ON FAILURE SHOW THE ERROR*/
-
-            })
-
-            return deferred.promise; /*RETURNING THE PROMISE*/
+        /*
+           * ANGULAR PROVIDER METHOD TO GET REQUIRED DATA USING HTTP SERVICES
+           * @param URL-FROM WHERE TO FETCH THE DATA
+           * @param HTTP METHOD
+           * @param REQUEST DATA
+           * @return RESPONSE (PROMISE)
+        */
         
-/*-----------------------------------------------OR(NOT WORKING) ---------------------------  */
-
-/*          var data = { isbn: bookID };
-      
-            var header =  {
-                        
-                        'Content-type':'application/json; charset=UTF-8',
-             }
-             
-            return $http.delete(baseUrl+'/book/remove',JSON.stringify(data),header)
-                        .then(function(respond){
+        return commonServiceProvider.getDataUsingHTTPService('/book/remove','DELETE',data)
                 
-                    return respond.data;
-            });        
- */       
-        
+                .then(function(respond){
+            
+            return respond.data;
+            
+        })   
+                
+
     };
-    
 
     return bookFactory; /* RETURN THE FACTORY OBJECT TO CONTROLLER*/
+    
 
  }]); /*END OF FACTORY*/
     

@@ -1,188 +1,155 @@
-/*-----------------------------------FACTORY FOR AUTHOR---------------------------*/
-/*--------------------AJAX REQUESTS AND SERVICING CONTROLLER WITH REQUIRED DATA --------------*/
-/*-------------------------- USAGE OF PROMISE. $Q AND $HTTP SERVICES.*/
+/*-----------------------------------FACTORY FOR AUTHOR----------------------------------*/
+/*---------------AJAX REQUESTS AND SERVICING CONTROLLER WITH REQUIRED DATA --------------*/
+/*-------------------------- USAGE OF PROMISE. $Q AND $HTTP SERVICES.---------------------*/
 
 'use strict';
 
-(function(angular) {
+(function (angular) {
 
 angular.module('mainApp')
 
-.factory('authorFactory',['$http','$q','baseUrl', function($http,$q,baseUrl) {
+    /*
+       * FACTORY METHOD OF ANGULAR
+       * @param FIRST PARAMETER IS FACTORY NAME.
+       * @param SECOND PARAMETER IS DEPENDENCIES INJECTION
+       * @return OBJECT TO THE CONTROLLER
+    */
+
+.factory('authorFactory', ['$http', '$q', 'commonServiceProvider', function ($http, $q, commonServiceProvider) {
  
+    
     /*CREATE ONE OBJECT*/        
 
     var authorFactory = {};
 
-    
-    /*GET REQUEST TO FETCH EXISTING USER BASED ON PARAMETER */
+    /*
+       * GET REQUEST TO FETCH EXISTING USER BASED ON PARAMETER.
+       * @param AUTHOR(i.e. AUTHORNAME) THIS IS THE FIRST PARAMETER TO GETAUTHOR METHOD
+       * @return RESPOND DATA TO THE CONTROLLER (SUCCESS OR ERROR)
+    */
     
     authorFactory.getAuthor = function(author) {
 
-/*-------------------------  YOU CAN USE PROMISE ------------------------------------------------*/  
+        var data  = { "name" : author };
         
- /*       var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
-         
-        $http({
-
-                method:'POST',
-                url: baseUrl+'/author/byname',
-                data:'name='+author+'',
-                headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
-
-            }).success(function(data){
+        /*
+           * ANGULAR PROVIDER METHOD TO GET REQUIRED DATA USING HTTP SERVICES
+           * @param URL-FROM WHERE TO FETCH THE DATA
+           * @param HTTP METHOD
+           * @param REQUEST DATA
+           * @return RESPONSE (PROMISE)
+        */
+        
+        return commonServiceProvider.getDataUsingHTTPService('/author/byname','POST',data)
                 
-                deferred.resolve(data); ON SUCCESS RESOLVE DATA 
-
-            }).error(function(data){
- 
-                deferred.reject('There was an error'); ON FAILURE SHOW ERROR
-
-            })
-
-            return deferred.promise; RETURN THE PROMISE*/
-        
-
-/* --------------------------------- OR -------------------------------------------------------*/                  
-        
-            var header = {
-                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-            }
+                .then(function(respond){
             
-            var data  = { "name" : author };
-        
-            return $http.post(baseUrl+'/author/byname',data,header).then(function(respond){
-                
-                     return respond.data;
-                });    
+            return respond.data;
+            
+        })    
 
-    };
+    }; /*END OF getAuthor() FUNCTION*/
     
     
-    /*POST REQUST TO CREATE A NEW AUTHOR */
+    /*
+       * POST REQUST TO CREATE A NEW AUTHOR.
+       * @param NEWAUTHOR (OBJECT)
+       * @return RESPOND DATA TO THE CONTROLLER (SUCCESS OR ERROR)
+    */
     
     authorFactory.createAuthor = function(newAuthor) {
-
-/*-------------------------  YOU CAN USE PROMISE ------------------------------------------------*/  
         
- /*       var deferred = $q.defer();    CREATING A DEFERRED OBJECT   
-        
-        $http({
-
-                method:'POST',
-                dataType:'JSON',
-                url: baseUrl+'/author/new',
-                data:$.param(newAuthor),
-                headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
-            }).success(function(data){
+            var newAuthorJSONFormat = {
                 
-                deferred.resolve(data); ON SUCCESS RESOLVE DATA 
-
-            }).error(function(data){
- 
-                deferred.reject('There was an error'); ON FAILURE SHOW ERROR
-
-            })
-
-            return deferred.promise; RETURN THE PROMISE*/
-        
-/* --------------------------------- OR ------------------------------------ ------------------*/                    
-            var header = {
-                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-            }
+                "empid" : newAuthor.empid,
+                "name"  : newAuthor.name,
+                "email" : newAuthor.email,
+                "skills" : newAuthor.skills.toString().split(','),
+                "department" : newAuthor.department,
+                "website" : newAuthor.website
+                
+            };
             
-            return $http.post(baseUrl+'/author/new',newAuthor,header).then(function(respond){
-                
-                    return respond.data;
-            });                 
 
-    };
+        /*
+           * ANGULAR PROVIDER METHOD TO GET REQUIRED DATA USING HTTP SERVICES
+           * @param URL-FROM WHERE TO FETCH THE DATA
+           * @param HTTP METHOD
+           * @param REQUEST DATA
+           * @return RESPONSE (PROMISE)
+        */
+        
+return commonServiceProvider.getDataUsingHTTPService('/author/new','POST',newAuthorJSONFormat)
+                
+                .then(function(respond){
+            
+            return respond.data;
+            
+        })         
+        
+    };  /*END OF createAuthor() FUNCTION  */
     
     
-    /* PUT REQUEST TO UPDATE THE EXISTING AUTHOR */
+    /*
+       * PUT REQUEST TO UPDATE THE EXISTING AUTHOR.
+       * @param AUTHOR (OBJECT) - WITH UPDATED VALUES
+       * @return RESPOND DATA TO THE CONTROLLER (SUCCESS OR ERROR)
+    */
     
     authorFactory.updateAuthor = function(author) {
-        
-/*-------------------------  YOU CAN USE PROMISE ------------------------------------------------*/          
-       /* var deferred = $q.defer();    CREATING A DEFERRED OBJECT 
-        
-        $http({
-
-                method:'PUT',
-                url: baseUrl+'/author/update',
-                data:$.param(author),
-                headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
-            }).success(function(data){
                 
-                deferred.resolve(data); ON SUCCESS RESOLVE DATA 
-
-            }).error(function(data){
- 
-                deferred.reject('There was an error'); ON FAILURE SHOW ERROR
-
-            })
-
-            return deferred.promise; RETURN THE PROMISE*/
         
-/* --------------------------------- OR ------------------------------------ ------------------*/           
-            var header = {
-                    'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
-            }
+        /*
+           * ANGULAR PROVIDER METHOD TO GET REQUIRED DATA USING HTTP SERVICES
+           * @param URL-FROM WHERE TO FETCH THE DATA
+           * @param HTTP METHOD
+           * @param REQUEST DATA
+           * @return RESPONSE (PROMISE)
+        */
+        
+        
+        return commonServiceProvider.getDataUsingHTTPService('/author/update','PUT',author)
+                
+                .then(function(respond){
             
-            return $http.put(baseUrl+'/author/update',author,header).then(function(respond){
-                
-                    return respond.data;
-            });           
-        
-    };
+            return respond.data;
+            
+        })         
+
+    }; /*END OF updateAuthor() FUNCTION */
     
     
-    /*DELETE REQUEST TO REMOVE THE EXSITING AUTHOR */
+    /*
+       * DELETE REQUEST TO REMOVE THE EXSITING AUTHOR.
+       * @param AUTHORID - ID OF THE AUTHOR YOU WANT TO UPDATE
+       * @return RESPOND DATA TO THE CONTROLLER (SUCCESS OR ERROR)
+    */
     
     authorFactory.removeAuthor = function(authorID) {
+                    
+        var data = {"empid":authorID};
         
-/*-------------------------  YOU CAN USE PROMISE ------------------------------------------------*/  
+        /*
+           * ANGULAR PROVIDER METHOD TO GET REQUIRED DATA USING HTTP SERVICES
+           * @param URL-FROM WHERE TO FETCH THE DATA
+           * @param HTTP METHOD
+           * @param REQUEST DATA
+           * @return RESPONSE (PROMISE)
+        */
         
-        var deferred = $q.defer();   /*CREATING A DEFERRED OBJECT*/  
-        
-        $http({
-
-                method:'DELETE',
-                url: baseUrl+'/author/remove',
-                data:'empid='+authorID+'',
-                headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
-            }).success(function(data){
+        return commonServiceProvider.getDataUsingHTTPService('/author/remove','DELETE',data)
                 
-                deferred.resolve(data); /* ON SUCCESS RESOLVE DATA */
-                
-            }).error(function(data){
- 
-                deferred.reject('There was an error'); /* ON FAILURE SHOW ERROR*/
-
-            })
-
-            return deferred.promise; /*RETURN THE PROMISE*/
+                .then(function(respond){
+            
+            return respond.data;
+            
+        }) 
         
-/*-----------------------------------------------OR(NOT WORKING) ---------------------------  */
 
-/*          var data = { empid: authorID };
-      
-            var header =  {
-                        
-                        'Content-type':'application/json; charset=UTF-8',
-             }
-             
-            return $http.delete(baseUrl+'/author/remove',JSON.stringify(data),header)
-                        .then(function(respond){
-                
-                    return respond.data;
-            });        
-                */
-        
-    };
-    
-    
-  return authorFactory; /* RETURN THE FACTORY OBJECT TO CONTROLLER */
+    }; /*END OF .removeAuthor() METHOD */
+       
+  
+    return authorFactory; /* RETURN THE FACTORY OBJECT TO CONTROLLER */
 
  }]); /* END OF FACTORY*/
     

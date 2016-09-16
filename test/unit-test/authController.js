@@ -174,7 +174,7 @@ describe('Controller: authController',function(){
             
         });
         
-        it('SHOLD CREATE SINGLE BOOK ',function(){
+        it('SHOULD CREATE SINGLE AUTHOR ',function(){
             $httpBackend.whenPOST("http://172.27.12.104:3000/author/new").respond(200,$q.when(response));
             
             expect(scope.addNewAuthor).not.toHaveBeenCalled();
