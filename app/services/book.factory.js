@@ -19,7 +19,7 @@ angular.module('mainApp')
     # @param THIRD PARAMETER IS THE BASEURL - CONSTANT WE HAVE DEFINED EARLIER.
 */
 
-.run(function(commonServiceProvider,$http,baseUrl){
+.run(['commonServiceProvider','$http','baseUrl',function(commonServiceProvider,$http,baseUrl){
       
     commonServiceProvider.getDataUsingHTTPService = function (Url,Method,Data) {
             
@@ -34,7 +34,7 @@ angular.module('mainApp')
             
             };
     
-}) /*END OF RUN METHOD*/
+}]) /*END OF RUN METHOD*/
 
 /*
        * FACTORY METHOD OF ANGULAR
@@ -112,9 +112,7 @@ angular.module('mainApp')
     */
     
      bookFactory.createBook = function(newBook) {
-            
-            console.log(newBook.availableOn);
-            
+             
             var newAuthorJSONFormat = {
                 
                 "isbn" : newBook.isbn,
@@ -133,11 +131,11 @@ angular.module('mainApp')
         */
          
          
-       /* return commonServiceProvider.getDataUsingHTTPService('/book/new','POST',newAuthorJSONFormat).then(function(respond){
+        return commonServiceProvider.getDataUsingHTTPService('/book/new','POST',newAuthorJSONFormat).then(function(respond){
 
             return respond.data;
             
-            }) */  
+            })   
          
 
         }; /*END OF .createBook() FUNCTION */

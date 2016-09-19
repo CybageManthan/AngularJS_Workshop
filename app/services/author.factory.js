@@ -15,7 +15,8 @@ angular.module('mainApp')
        * @return OBJECT TO THE CONTROLLER
     */
 
-.factory('authorFactory', ['$http', '$q', 'commonServiceProvider', function ($http, $q, commonServiceProvider) {
+.factory('authorFactory', 
+['$http','$q','commonServiceProvider', function ($http,$q,commonServiceProvider) {
  
     
     /*CREATE ONE OBJECT*/        

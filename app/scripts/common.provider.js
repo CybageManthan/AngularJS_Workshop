@@ -15,7 +15,7 @@ angular.module('mainApp')
 
 .provider('commonServiceProvider',function(){
    
-    this.$get =  function ($http,baseUrl) {
+    this.$get =  function ($http) {
         
         return {
           

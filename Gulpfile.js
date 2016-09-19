@@ -50,7 +50,7 @@ gulp.task('usemin',['jshint'],function(){
     .pipe(usemin({
         
         css: [minifycss(),rev()],
-        js:  [uglify(),rev()]
+        js:  [rev()]
         
     }))
     .pipe(gulp.dest('dist/'));

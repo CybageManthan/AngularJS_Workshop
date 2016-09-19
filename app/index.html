@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     
     <title>Library Management System</title>
@@ -47,17 +47,18 @@
     <div ui-view="footer"></div>  <!-- FOOTER --> 
 
     <!-- build:js js/library.js -->
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="../bower_components/angular-mocks/angular-mocks.js"></script>
     
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="scripts/app.js"></script>
-    <script src="controllers/book.controller.js"></script> 
+    <script src="controllers/book.controller.js"></script>
+    <script src="scripts/common.provider.js"></script>
     <script src="services/book.factory.js"></script>
     <script src="controllers/author.controller.js"></script> 
     <script src="services/author.factory.js"></script>
-    <script src="scripts/common.provider.js"></script>
+   
     <!-- endbuild -->
 
 </body> <!--END OF BODY -->
