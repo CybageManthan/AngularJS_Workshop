@@ -4,8 +4,9 @@
 
 * Angular
     *  SPA.
-    *  Angular Routing,Angular 2 way Binding, Factories,controller,filters.
-    *  $http Services(Factory,Providers)
+    *  Angular Routing,Angular1 - 2 WayBinding, Factories,controller,filters.
+    *  $http Service
+    *  Angular Services - Factory,Providers
 * Bower
 * Bootstrap and Font-Awesome
 * Testing Framework
