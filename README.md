@@ -1,5 +1,8 @@
 # AngularJS_Workshop
 
+## Library Management System. 
+   * Create New Book,New Author,Display All Books,Edit/Update/Remove Existing Book and Author.
+
 ###THIS APPLICATION DEMONSTRATE THE USAGE OF
 
 * Angular
