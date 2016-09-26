@@ -14,11 +14,11 @@
 * Task Runnner
    * **Gulp**
     
-* app folder have all the code of application.
-  * services dir : factories implement.
-  * controllers dir: controller logic.
-  * views dir : all the views
-  * script dir : js files
+* **app** folder have all the code of application.
+  * **services** dir : factories implement.
+  * **controllers** dir: controller logic.
+  * **views** dir : all the views
+  * **script** dir : js files
 
 * dist folder is the folder use for production and running the application . 
    
