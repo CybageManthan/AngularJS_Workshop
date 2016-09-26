@@ -57,7 +57,7 @@ Q. **To Test the Application using Karma and Jasmine**
 A. Go to Test folder and run command : karma start karma.conf.js
 
     requirements:
-    
+    npm install karma-cli -g
     command : npm install will install necessary module for the Karma and Jasmine.
     
 
