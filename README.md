@@ -5,13 +5,13 @@
 * Angular
     *  SPA.
     *  Angular Routing,Angular 2 way Binding, Factories,controller,filters.
-    *  $http,$q services of Angular.
+    *  $http Services(Factory,Providers)
 * Bower
 * Bootstrap and Font-Awesome
 * Testing Framework
-    * Jasmine and Karma
+    * **Jasmine and Karma**
 * Task Runnner
-   * Gulp
+   * **Gulp**
     
 * app folder have all the code of application.
   * services dir : factories implement.
@@ -21,7 +21,7 @@
 
 * dist folder is the folder use for production and running the application . 
    
-   * gulp will create the dist folder.
+   *  **gulp** will create the **dist** folder.
 
 * test folder have karma configuratio file and test-suits in unit-test folder for
     
