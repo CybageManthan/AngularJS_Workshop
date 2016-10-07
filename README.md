@@ -1,6 +1,7 @@
 # AngularJS_Workshop
 
 ## Library Management System. 
+   * Mockups available in ProjectDescription_Mockups Folder To see How application looks.
    * Create New Book,New Author,Display All Books,Edit/Update/Remove Existing Book and Author.
 
 ###THIS APPLICATION DEMONSTRATE THE USAGE OF
